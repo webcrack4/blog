@@ -82,6 +82,3 @@ relative_links:
 ![jekyllthemes](http://jekyllthemes.org/)
 
 ![beautiful-jekyll](https://github.com/daattali/beautiful-jekyll)
-
-
-{% include footer.html %}
