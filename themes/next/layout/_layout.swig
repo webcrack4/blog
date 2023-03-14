@@ -10,9 +10,6 @@
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
-  <% for (var link in site.data.menu) { %>
-    <a href="<%= site.data.menu[link] %>"> <%= link %> </a>
-  <% } %>
   <link rel="stylesheet" href="/dist/APlayer.min.css">
   <div id="aplayer"></div>
   <script type="text/javascript" src="/dist/APlayer.min.js"></script>
