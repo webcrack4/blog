@@ -1,5 +1,5 @@
 ---
-title: Bertrand Russell: On Avoiding Foolish Opinions
+title: Bertrand Russell - On Avoiding Foolish Opinions
 date: 2023-4-28 13:24:40
 categories: 
 - 读后感
