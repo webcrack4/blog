@@ -81,11 +81,6 @@ footer:
     gongan_icon_url:
 
 
-# Post wordcount display settings
-# Dependencies: https://github.com/next-theme/hexo-word-counter
-symbols_count_time:
-  separated_meta: true
-  item_text_total: false
 
 # Creative Commons 4.0 International License.
 # See: https://creativecommons.org/share-your-work/licensing-types-examples
