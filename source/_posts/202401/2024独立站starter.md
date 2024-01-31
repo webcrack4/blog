@@ -8,6 +8,7 @@ tags:
 
 ---
 
+网上教程千千万
 
 
 ## 个人做独立站的最佳流程
@@ -25,6 +26,9 @@ shopify/woocommerce
 
 LocalWp
 
-### 挑选模板
+### woocommerce必备组件checklist
+
+1. 收单
+2. 物流
 
 Astra
