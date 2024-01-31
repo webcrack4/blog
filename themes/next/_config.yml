@@ -407,6 +407,11 @@ github_banner:
 # Arial | Tahoma | Helvetica | Times New Roman | Courier New | Verdana | Georgia | Palatino | Garamond | Comic Sans MS | Trebuchet MS
 # ---------------------------------------------------------------
 
+index_generator:
+  path: ''
+  per_page: 5
+  order_by: -date
+
 font:
   enable: false
 
