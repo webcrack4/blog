@@ -108,7 +108,7 @@ symbols_count_time:
 # - https://waline.js.org/reference/component.html
 waline:
   # New! Whether enable this plugin
-  enable: false
+  enable: true
 
   # Waline server address url, you should set this to your own link
   serverURL: https://waline.vercel.app
