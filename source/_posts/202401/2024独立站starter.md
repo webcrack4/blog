@@ -4,7 +4,7 @@ date: 2024-01-31 9:21:40
 categories: 
 - 独立站
 tags:
-- 教程
+- 2024年woocommmerce教程
 ---
 网上教程千千万，很多教程都是上来直接动手shopify，不可否认shopify启动确实快，但是用独立站平台有几个风险点：
 
