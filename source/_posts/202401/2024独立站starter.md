@@ -12,7 +12,7 @@ tags:
 2. 难以迁移，如果shopify站做起来了，路径依赖只能一路走到黑，要迁移到wix etsy woocommerce等成本就高了，基本要重做。
 3. 难以拓展，虽然可以用Hydrogen做shopify的无头电商，但是如果放弃使用shopify作为后台，那么前端就要重新去对接新的后端，徒增工作量。既然开发无头电商了，为什么还要选择平台作为后端呢？
 4. 后期费用高，据了解shopify都是年付的，虽然目前单站价格不高，但仍有可能会有价格调整。
-5. 电商必须要收单，个人收单最低要求要有个体户注册商家Paypal才能在shopify里收单，派安盈 strip那些就更不用说了，需要公司资质，虽然可以挂靠，但是不可靠。而woocommerce可以用个人PayPal收单，目前可以用跨境宝零手续费提现。
+5. 电商必须要收单，个人收单最低要求要有个体户注册商家Paypal才能在shopify里收单，派安盈 strip那些就更不用说了，需要公司资质，虽然可以挂靠，但是时效和可靠性就低了。而woocommerce可以用个人PayPal收单，目前可以用跨境宝零手续费提现。
 
 所以个人认为shopify只适合1刀三个月快速滚服快速试错的模式。然而如果希望能长久运营一个独立站，个人认为还是最好确保站点可控，平台类不合适，woocommerce自建站才更贴合细水长流的模式。
 
@@ -32,39 +32,39 @@ tags:
 
 1. 先去[localwp](https://localwp.com/)官网下载工具，安装，创建新站
 
-![1706682783150](image/2024独立站starter/1706682783150.png)
+![1706682783150](https://claytonweb3.4everland.store/2024%E7%8B%AC%E7%AB%8B%E7%AB%99starter/1706682783150.png)
 
 2. 配置
 
 在Appearance的Theme里安装Astra模板
 
-![1706683429351](image/2024独立站starter/1706683429351.png)
+![1706683429351](https://claytonweb3.4everland.store/2024%E7%8B%AC%E7%AB%8B%E7%AB%99starter/1706683429351.png)
 
 3. Starter Template里搜索E-Commerce选择一个电商的装进去
 
-![1706683527152](image/2024独立站starter/1706683527152.png)
+![1706683527152](https://claytonweb3.4everland.store/2024%E7%8B%AC%E7%AB%8B%E7%AB%99starter/1706683527152.png)
 
 安装完之后发现插件里就装了四个东西，woocommerce就带进来了
 
-![1706683617122](image/2024独立站starter/1706683617122.png)
+![1706683617122](https://claytonweb3.4everland.store/2024%E7%8B%AC%E7%AB%8B%E7%AB%99starter/1706683617122.png)
 
 现在首页已经是一个可以用的电商页面了，但是整个流程是走不通的，因为不能付款收单，所以要补充收单插件
 
 5. 收单插件
-   在Add Plugins搜索Pay，安装激活Woocommerce Paypal Payment![1706683957022](image/2024独立站starter/1706683957022.png)
+   在Add Plugins搜索Pay，安装激活Woocommerce Paypal Payment![1706683957022](https://claytonweb3.4everland.store/2024%E7%8B%AC%E7%AB%8B%E7%AB%99starter/1706683957022.png)
    连接Paypal
 
-   ![1706684343574](image/2024独立站starter/1706684343574.png)
+   ![1706684343574](https://claytonweb3.4everland.store/2024%E7%8B%AC%E7%AB%8B%E7%AB%99starter/1706684343574.png)
    连接成功如下图
 
-   ![1706684997685](image/2024独立站starter/1706684997685.png)
+   ![1706684997685](https://claytonweb3.4everland.store/2024%E7%8B%AC%E7%AB%8B%E7%AB%99starter/1706684997685.png)
 
-   确保支付方式启用![1706685685733](image/2024独立站starter/1706685685733.png)
+   确保支付方式启用![1706685685733](https://claytonweb3.4everland.store/2024%E7%8B%AC%E7%AB%8B%E7%AB%99starter/1706685685733.png)
 
 ---
 
 好了，现在可以走通全流程了，添加了商品之后，checkout，就可以用paypal支付
 
-![1706685738226](image/2024独立站starter/1706685738226.png)
+![1706685738226](https://claytonweb3.4everland.store/2024%E7%8B%AC%E7%AB%8B%E7%AB%99starter/1706685738226.png)
 
 那么整个流程就结束了，大概10分钟内就能完成这个流程
