@@ -80,6 +80,13 @@ footer:
     # The icon for gongan beian. See: http://www.beian.gov.cn/portal/download
     gongan_icon_url:
 
+
+# Post wordcount display settings
+# Dependencies: https://github.com/next-theme/hexo-word-counter
+symbols_count_time:
+  separated_meta: true
+  item_text_total: false
+
 # Creative Commons 4.0 International License.
 # See: https://creativecommons.org/share-your-work/licensing-types-examples
 # Available values of license: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | zero
@@ -1000,16 +1007,3 @@ vendors:
 css: css
 js: js
 images: images
-
-# Post wordcount display settings
-# Dependencies: https://github.com/theme-next/hexo-symbols-count-time
-symbols_count_time:
-  separated_meta: true
-  #文章中的显示是否显示文字（本文字数|阅读时长） 
-  item_text_post: true
-  #网页底部的显示是否显示文字（站点总字数|站点阅读时长） 
-  item_text_total: false
-  # Average Word Length (chars count in word)
-  awl: 4
-  # Words Per Minute
-  wpm: 275
