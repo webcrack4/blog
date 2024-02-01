@@ -616,7 +616,7 @@ changyan:
 # Valine
 # For more information: https://valine.js.org, https://github.com/xCss/Valine
 valine:
-  enable: true
+  enable: false
   appid: baQHCa1U2GTui1ZdY11S9dZG-MdYXbMMI
   appkey: JwlpuD1ytsegRwsOzxq5TJ6M
   notify: false # Mail notifier
@@ -639,12 +639,12 @@ livere_uid: # <your_uid>
 # Gitalk
 # For more information: https://gitalk.github.io, https://github.com/gitalk/gitalk
 gitalk:
-  enable: false
-  github_id: # GitHub repo owner
-  repo: # Repository name to store issues
-  client_id: # GitHub Application Client ID
-  client_secret: # GitHub Application Client Secret
-  admin_user: # GitHub repo owner and collaborators, only these guys can initialize gitHub issues
+  enable: true
+  github_id: webcrack4
+  repo: blog
+  client_id: 79e552a600328f132515
+  client_secret: 06ff5f7aefe253462ff4ab92c2dcc0f62b88f365
+  admin_user: webcrack4
   distraction_free_mode: true # Facebook-like distraction free mode
   # Gitalk's display language depends on user's browser or system environment
   # If you want everyone visiting your site to see a uniform language, you can set a force language value
