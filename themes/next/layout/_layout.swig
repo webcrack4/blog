@@ -9,7 +9,7 @@
   {{ partial('_scripts/noscript.swig', {}, {cache: theme.cache.enable}) }}
    <link
     rel="stylesheet"
-    href="https://unpkg.com/@waline/client@v3/dist/waline.css"
+    href="https://unpkg.com/@waline/client@v2/dist/waline.css"
   />
 </head>
 
@@ -62,7 +62,7 @@
   {%- endif %}
   <div id="waline"></div>
   <script type="module">
-    import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+    import { init } from 'https://unpkg.com/@waline/client@v2/dist/waline.js';
 
     init({
       el: '#waline',
