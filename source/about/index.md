@@ -16,8 +16,6 @@ date:
 
 Youtube： [Clayton Web3.0](https://youtube.com/@Clayton_web3?feature=shared)
 
-电报交流群：[Clayton Web3.0交流群](https://t.me/+vt0flsa63d9jMmM1)
-
 微信：claytonweb3
 
 ![1706679918305](image/index/1706679918305.png)
