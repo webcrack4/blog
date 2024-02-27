@@ -16,6 +16,11 @@ date:
 
 Youtube： [Clayton Web3.0](https://youtube.com/@Clayton_web3?feature=shared)
 
+QQ群分享各路相关资讯：
+
+<a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=YQhiCvQXq7X2ZAJDisyS71ZSCfmUkB1L&jump_from=webapi&authKey=rz6CdquhBMOqghfWq0/CzT2it4RP0lyp6wCG+LgOK3E+gi/PDqmM2zsW4snVnnWf"><img border="0" src="https://pub.idqqimg.com/wpa/images/group.png" alt="Clayton Web3.0" title="Clayton Web3.0"></a>
+
+
 微信：claytonweb3
 
 ![1706679918305](image/index/1706679918305.png)
