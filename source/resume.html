@@ -180,7 +180,7 @@
       }
 
       .resume-container {
-        padding: 15mm 20mm;
+        padding: 10mm 15mm;
         min-height: auto;
       }
 
@@ -189,7 +189,14 @@
       }
 
       .lang-content {
-        display: none !important;
+        display: block !important;
+        page-break-after: always;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+      }
+
+      .lang-content:last-child {
+        page-break-after: auto;
       }
 
       .lang-content.active {
@@ -197,7 +204,7 @@
       }
 
       @page {
-        margin: 0;
+        margin: 10mm;
         size: A4;
       }
     }
