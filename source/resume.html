@@ -1,187 +1,567 @@
----
-title: My Resume - Yang Zhenzhong
-date: 2026-01-13 12:00:00
-type: "resume"
-layout: page
-comments: false
----
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume - Yang Zhenzhong</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-<style>
-  .resume-container {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-    color: #333;
-    line-height: 1.6;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  .resume-header {
-    text-align: center;
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
-    border-bottom: 2px solid #eee;
-  }
-  .resume-header h1 {
-    margin: 0;
-    font-size: 2.2rem;
-    color: #2c3e50;
-  }
-  .resume-header p {
-    color: #666;
-    margin: 0.5rem 0;
-  }
-  .resume-section {
-    margin-bottom: 2rem;
-  }
-  .resume-section h2 {
-    font-size: 1.5rem;
-    border-left: 5px solid #42b983; /* Vue/Hexo Green vibe */
-    padding-left: 10px;
-    margin-bottom: 1rem;
-    color: #2c3e50;
-  }
-  .job-item {
-    margin-bottom: 1.5rem;
-  }
-  .job-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    flex-wrap: wrap;
-  }
-  .job-title {
-    font-weight: bold;
-    font-size: 1.1rem;
-    color: #34495e;
-  }
-  .job-company {
-    font-style: italic;
-    color: #666;
-  }
-  .job-date {
-    color: #999;
-    font-size: 0.9rem;
-  }
-  .tag {
-    display: inline-block;
-    background: #f0f0f0;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 0.85rem;
-    margin-right: 5px;
-    margin-bottom: 5px;
-    color: #555;
-  }
-</style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: #333;
+      line-height: 1.6;
+      background: #f5f5f5;
+    }
 
-<div class="resume-container">
+    .page-wrapper {
+      max-width: 210mm;
+      margin: 20px auto;
+      background: white;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
 
-  <div class="resume-header">
-    <h1>Yang Zhenzhong</h1>
-    <p>Full Stack Engineer (Golang / .NET) | HK & Shenzhen</p >
-    <p>
-      <i class="fa fa-envelope"></i> [Your Email] &bull; 
-      <i class="fa fa-github"></i> [Your GitHub] &bull; 
-      🇺🇸 US Educated
-    </p >
+    .resume-container {
+      padding: 20mm 25mm;
+      min-height: 297mm;
+    }
+
+    .lang-switch {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: white;
+      padding: 10px 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+
+    .lang-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      margin: 0 3px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      text-decoration: none;
+      color: #555;
+      background: #fff;
+      transition: all 0.3s ease;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .lang-btn:hover {
+      background: #f0f0f0;
+      border-color: #ccc;
+    }
+
+    .lang-btn.active {
+      background: #42b983;
+      color: #fff;
+      border-color: #42b983;
+    }
+
+    .print-btn {
+      position: fixed;
+      top: 20px;
+      right: 200px;
+      background: #42b983;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      box-shadow: 0 2px 10px rgba(66, 185, 131, 0.3);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .print-btn:hover {
+      background: #3aa876;
+      transform: translateY(-2px);
+    }
+
+    .resume-header {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid #42b983;
+    }
+
+    .resume-header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      color: #2c3e50;
+    }
+
+    .resume-header p {
+      color: #666;
+      margin: 0.5rem 0;
+    }
+
+    .resume-section {
+      margin-bottom: 2rem;
+    }
+
+    .resume-section h2 {
+      font-size: 1.5rem;
+      border-left: 5px solid #42b983;
+      padding-left: 10px;
+      margin-bottom: 1rem;
+      color: #2c3e50;
+    }
+
+    .job-item {
+      margin-bottom: 1.5rem;
+    }
+
+    .job-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+    }
+
+    .job-title {
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: #34495e;
+    }
+
+    .job-company {
+      font-style: italic;
+      color: #666;
+    }
+
+    .job-date {
+      color: #999;
+      font-size: 0.9rem;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #f0f0f0;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      margin-right: 5px;
+      margin-bottom: 5px;
+      color: #555;
+    }
+
+    .lang-content {
+      display: none;
+    }
+
+    .lang-content.active {
+      display: block;
+    }
+
+    @media print {
+      body {
+        background: white;
+      }
+
+      .page-wrapper {
+        margin: 0;
+        box-shadow: none;
+        max-width: none;
+      }
+
+      .lang-switch,
+      .print-btn {
+        display: none !important;
+      }
+
+      .resume-container {
+        padding: 15mm 20mm;
+        min-height: auto;
+      }
+
+      .resume-header {
+        border-bottom: 2px solid #42b983;
+      }
+
+      .lang-content {
+        display: none !important;
+      }
+
+      .lang-content.active {
+        display: block !important;
+      }
+
+      @page {
+        margin: 0;
+        size: A4;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="lang-switch">
+    <button class="lang-btn active" onclick="switchLang('zh')">简体中文</button>
+    <button class="lang-btn" onclick="switchLang('zh-tw')">繁體中文</button>
+    <button class="lang-btn" onclick="switchLang('en')">English</button>
   </div>
 
-  <div class="resume-section">
-    <h2>🚀 Professional Summary</h2>
-    <p>
-      Senior Software Engineer with <strong>7+ years of experience</strong> in architecting high-performance distributed systems. Native Cantonese speaker with a B.S. in Computer Science from <strong>Western Oregon University</strong>. 
-    </p >
-    <p>
-      I advocate for <strong>"Vibe Coding"</strong> — leveraging AI-augmented tools (Cursor, Copilot) to achieve 3x development velocity. I specialize in backend architecture (Golang/.NET), microservices, and high-concurrency gaming servers.
-    </p >
+  <button class="print-btn" onclick="window.print()">📄 打印 / Print</button>
+
+  <div class="page-wrapper">
+    <div class="resume-container">
+      
+      <div id="zh" class="lang-content active">
+        <div class="resume-header">
+          <h1>杨振中</h1>
+          <p>全栈工程师 (Golang / .NET) | 香港 & 深圳</p>
+          <p>
+            📧 [您的邮箱] &bull; 
+            🔗 [您的GitHub] &bull; 
+            🇺🇸 美国留学经历
+          </p>
+        </div>
+
+        <div class="resume-section">
+          <h2>🚀 个人简介</h2>
+          <p>
+            高级软件工程师，拥有<strong>10年以上工作经验</strong>，专注于高性能分布式系统架构。母语为粤语，毕业于<strong>美国西俄勒冈大学</strong>计算机科学专业。
+          </p>
+          <p>
+            我推崇<strong>"Vibe Coding"</strong>理念——利用AI增强工具（Cursor、Copilot）实现3倍开发效率。专长于后端架构（Golang/.NET）、微服务和高并发游戏服务器开发。
+          </p>
+        </div>
+
+        <div class="resume-section">
+          <h2>🛠 技能</h2>
+          <div>
+            <span class="tag">Golang</span>
+            <span class="tag">.NET Core / C#</span>
+            <span class="tag">微服务</span>
+            <span class="tag">分布式系统</span>
+            <span class="tag">Docker / K8s</span>
+            <span class="tag">Redis</span>
+            <span class="tag">RabbitMQ</span>
+            <span class="tag">Consul</span>
+            <span class="tag">英语（专业级）</span>
+            <span class="tag">粤语（母语）</span>
+          </div>
+        </div>
+
+        <div class="resume-section">
+          <h2>💼 工作经历</h2>
+
+          <div class="job-item">
+            <div class="job-header">
+              <span class="job-title">.NET工程师（微服务）</span>
+              <span class="job-date">2021.04 – 至今</span>
+            </div>
+            <div class="job-company">近铁世界物流 | 深圳</div>
+            <ul>
+              <li>主导核心物流系统的迁移和开发，使用<strong>.NET Core</strong>技术栈。</li>
+              <li>使用<strong>Consul</strong>（服务发现）、<strong>Ocelot</strong>（网关）和<strong>RabbitMQ</strong>架构高可用解决方案。</li>
+              <li>实现<strong>MinIO</strong>分布式对象存储和<strong>ELK Stack</strong>全面监控。</li>
+            </ul>
+          </div>
+
+          <div class="job-item">
+            <div class="job-header">
+              <span class="job-title">Golang工程师（分布式后端）</span>
+              <span class="job-date">2020.07 – 2021.03</span>
+            </div>
+            <div class="job-company">广州立兆网络</div>
+            <ul>
+              <li>使用<strong>Golang</strong>架构"仙界大陆"后端，采用类似Skynet的Actor模型。</li>
+              <li>使用NATS消息队列提升网关性能<strong>80%</strong>。</li>
+              <li>使用<strong>Ctrie</strong>和<strong>压缩位图</strong>优化内存和搜索性能。</li>
+            </ul>
+          </div>
+
+          <div class="job-item">
+            <div class="job-header">
+              <span class="job-title">游戏服务器开发</span>
+              <span class="job-date">2018.08 – 2020.01</span>
+            </div>
+            <div class="job-company">广州卓游科技</div>
+            <ul>
+              <li>使用PHP和C++开发"纯白魔女"（史克威尔艾尼克斯IP）后端。</li>
+              <li>实现跨平台账号关联和反作弊机制。</li>
+            </ul>
+          </div>
+          
+          <div class="job-item">
+            <div class="job-header">
+              <span class="job-title">.NET软件工程师</span>
+              <span class="job-date">2016.07 – 2018.05</span>
+            </div>
+            <div class="job-company">Gels Logistics Inc.（美国）</div>
+            <ul>
+              <li>使用.NET和Angular进行全栈开发。</li>
+              <li>通过执行计划分析和索引策略将SQL性能优化50%以上。</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="resume-section">
+          <h2>🎓 教育背景</h2>
+          <div class="job-item">
+            <div class="job-header">
+              <span class="job-title">美国西俄勒冈大学</span>
+              <span class="job-date">2013 – 2015</span>
+            </div>
+            <div class="job-company">计算机科学学士</div>
+          </div>
+          <div class="job-item">
+            <div class="job-header">
+              <span class="job-title">大连工业大学</span>
+              <span class="job-date">2011 – 2013</span>
+            </div>
+            <div class="job-company">计算机科学学士</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="zh-tw" class="lang-content">
+        <div class="resume-header">
+          <h1>楊振中</h1>
+          <p>全棧工程師 (Golang / .NET) | 香港 & 深圳</p>
+          <p>
+            📧 [您的郵箱] &bull; 
+            🔗 [您的GitHub] &bull; 
+            🇺🇸 美國留學經歷
+          </p>
+        </div>
+
+        <div class="resume-section">
+          <h2>🚀 個人簡介</h2>
+          <p>
+            高級軟件工程師，擁有<strong>10年以上工作經驗</strong>，專注於高性能分佈式系統架構。母語為粵語，畢業於<strong>美國西俄勒岡大學</strong>計算機科學專業。
+          </p>
+          <p>
+            我推崇<strong>"Vibe Coding"</strong>理念——利用AI增強工具（Cursor、Copilot）實現3倍開發效率。專長於後端架構（Golang/.NET）、微服務和高並發遊戲服務器開發。
+          </p>
+        </div>
+
+        <div class="resume-section">
+          <h2>🛠 技能</h2>
+          <div>
+            <span class="tag">Golang</span>
+            <span class="tag">.NET Core / C#</span>
+            <span class="tag">微服務</span>
+            <span class="tag">分佈式系統</span>
+            <span class="tag">Docker / K8s</span>
+            <span class="tag">Redis</span>
+            <span class="tag">RabbitMQ</span>
+            <span class="tag">Consul</span>
+            <span class="tag">英語（專業級）</span>
+            <span class="tag">粵語（母語）</span>
+          </div>
+        </div>
+
+        <div class="resume-section">
+          <h2>💼 工作經歷</h2>
+
+          <div class="job-item">
+            <div class="job-header">
+              <span class="job-title">.NET工程師（微服務）</span>
+              <span class="job-date">2021.04 – 至今</span>
+            </div>
+            <div class="job-company">近鐵世界物流 | 深圳</div>
+            <ul>
+              <li>主導核心物流系統的遷移和開發，使用<strong>.NET Core</strong>技術棧。</li>
+              <li>使用<strong>Consul</strong>（服務發現）、<strong>Ocelot</strong>（網關）和<strong>RabbitMQ</strong>架構高可用解決方案。</li>
+              <li>實現<strong>MinIO</strong>分佈式對象存儲和<strong>ELK Stack</strong>全面監控。</li>
+            </ul>
+          </div>
+
+          <div class="job-item">
+            <div class="job-header">
+              <span class="job-title">Golang工程師（分佈式後端）</span>
+              <span class="job-date">2020.07 – 2021.03</span>
+            </div>
+            <div class="job-company">廣州立兆網絡</div>
+            <ul>
+              <li>使用<strong>Golang</strong>架構"仙界大陸"後端，採用類似Skynet的Actor模型。</li>
+              <li>使用NATS消息隊列提升網關性能<strong>80%</strong>。</li>
+              <li>使用<strong>Ctrie</strong>和<strong>壓縮位圖</strong>優化內存和搜索性能。</li>
+            </ul>
+          </div>
+
+          <div class="job-item">
+            <div class="job-header">
+              <span class="job-title">遊戲服務器開發</span>
+              <span class="job-date">2018.08 – 2020.01</span>
+            </div>
+            <div class="job-company">廣州卓遊科技</div>
+            <ul>
+              <li>使用PHP和C++開發"純白魔女"（史克威爾艾尼克斯IP）後端。</li>
+              <li>實現跨平台賬號關聯和反作弊機制。</li>
+            </ul>
+          </div>
+          
+          <div class="job-item">
+            <div class="job-header">
+              <span class="job-title">.NET軟件工程師</span>
+              <span class="job-date">2016.07 – 2018.05</span>
+            </div>
+            <div class="job-company">Gels Logistics Inc.（美國）</div>
+            <ul>
+              <li>使用.NET和Angular進行全棧開發。</li>
+              <li>通過執行計劃分析和索引策略將SQL性能優化50%以上。</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="resume-section">
+          <h2>🎓 教育背景</h2>
+          <div class="job-item">
+            <div class="job-header">
+              <span class="job-title">美國西俄勒岡大學</span>
+              <span class="job-date">2013 – 2015</span>
+            </div>
+            <div class="job-company">計算機科學學士</div>
+          </div>
+          <div class="job-item">
+            <div class="job-header">
+              <span class="job-title">大連工業大學</span>
+              <span class="job-date">2011 – 2013</span>
+            </div>
+            <div class="job-company">計算機科學學士</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="en" class="lang-content">
+        <div class="resume-header">
+          <h1>Yang Zhenzhong</h1>
+          <p>Full Stack Engineer (Golang / .NET) | HK & Shenzhen</p>
+          <p>
+            📧 [Your Email] &bull; 
+            🔗 [Your GitHub] &bull; 
+            🇺🇸 US Educated
+          </p>
+        </div>
+
+        <div class="resume-section">
+          <h2>🚀 Professional Summary</h2>
+          <p>
+            Senior Software Engineer with <strong>10+ years of experience</strong> in architecting high-performance distributed systems. Native Cantonese speaker with a B.S. in Computer Science from <strong>Western Oregon University</strong>.
+          </p>
+          <p>
+            I advocate for <strong>"Vibe Coding"</strong> — leveraging AI-augmented tools (Cursor, Copilot) to achieve 3x development velocity. I specialize in backend architecture (Golang/.NET), microservices, and high-concurrency gaming servers.
+          </p>
+        </div>
+
+        <div class="resume-section">
+          <h2>🛠 Skills</h2>
+          <div>
+            <span class="tag">Golang</span>
+            <span class="tag">.NET Core / C#</span>
+            <span class="tag">Microservices</span>
+            <span class="tag">Distributed Systems</span>
+            <span class="tag">Docker / K8s</span>
+            <span class="tag">Redis</span>
+            <span class="tag">RabbitMQ</span>
+            <span class="tag">Consul</span>
+            <span class="tag">English (Professional)</span>
+            <span class="tag">Cantonese (Native)</span>
+          </div>
+        </div>
+
+        <div class="resume-section">
+          <h2>💼 Experience</h2>
+
+          <div class="job-item">
+            <div class="job-header">
+              <span class="job-title">.NET Engineer (Microservices)</span>
+              <span class="job-date">2021.04 – Present</span>
+            </div>
+            <div class="job-company">Kintetsu World Express | Shenzhen</div>
+            <ul>
+              <li>Led the migration and development of core logistics systems using <strong>.NET Core</strong>.</li>
+              <li>Architected high-availability solutions using <strong>Consul</strong> (Service Discovery), <strong>Ocelot</strong> (Gateway), and <strong>RabbitMQ</strong>.</li>
+              <li>Implemented <strong>MinIO</strong> for distributed object storage and <strong>ELK Stack</strong> for comprehensive monitoring.</li>
+            </ul>
+          </div>
+
+          <div class="job-item">
+            <div class="job-header">
+              <span class="job-title">Golang Engineer (Distributed Backend)</span>
+              <span class="job-date">2020.07 – 2021.03</span>
+            </div>
+            <div class="job-company">Guangzhou Lizhao Network</div>
+            <ul>
+              <li>Architected the backend for "Immortal Continent" using <strong>Golang</strong> with a Skynet-like Actor model.</li>
+              <li>Boosted gateway performance by <strong>80%</strong> using NATS messaging.</li>
+              <li>Optimized memory and search using <strong>Ctrie</strong> and <strong>Compressed Bitmaps</strong>.</li>
+            </ul>
+          </div>
+
+          <div class="job-item">
+            <div class="job-header">
+              <span class="job-title">Game Server Developer</span>
+              <span class="job-date">2018.08 – 2020.01</span>
+            </div>
+            <div class="job-company">Guangzhou Zhuoyou Technology</div>
+            <ul>
+              <li>Developed backend for "Pure White Witch" (Square Enix IP) using PHP and C++.</li>
+              <li>Implemented cross-platform account linking and anti-cheat mechanisms.</li>
+            </ul>
+          </div>
+          
+          <div class="job-item">
+            <div class="job-header">
+              <span class="job-title">.NET Software Engineer</span>
+              <span class="job-date">2016.07 – 2018.05</span>
+            </div>
+            <div class="job-company">Gels Logistics Inc. (US Based)</div>
+            <ul>
+              <li>Full-stack development with .NET and Angular.</li>
+              <li>Optimized SQL performance by 50%+ through execution plan analysis and indexing strategies.</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="resume-section">
+          <h2>🎓 Education</h2>
+          <div class="job-item">
+            <div class="job-header">
+              <span class="job-title">Western Oregon University (USA)</span>
+              <span class="job-date">2013 – 2015</span>
+            </div>
+            <div class="job-company">B.S. in Computer Science</div>
+          </div>
+          <div class="job-item">
+            <div class="job-header">
+              <span class="job-title">Dalian Polytechnic University</span>
+              <span class="job-date">2011 – 2013</span>
+            </div>
+            <div class="job-company">B.S. in Computer Science</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 
-  <div class="resume-section">
-    <h2>🛠 Skills</h2>
-    <div>
-      <span class="tag">Golang</span>
-      <span class="tag">.NET Core / C#</span>
-      <span class="tag">Microservices</span>
-      <span class="tag">Distributed Systems</span>
-      <span class="tag">Docker / K8s</span>
-      <span class="tag">Redis</span>
-      <span class="tag">RabbitMQ</span>
-      <span class="tag">Consul</span>
-      <span class="tag">English (Professional)</span>
-      <span class="tag">Cantonese (Native)</span>
-    </div>
-  </div>
-
-  <div class="resume-section">
-    <h2>💼 Experience</h2>
-
-    <div class="job-item">
-      <div class="job-header">
-        <span class="job-title">.NET Engineer (Microservices)</span>
-        <span class="job-date">2021.04 – Present</span>
-      </div>
-      <div class="job-company">Kintetsu World Express | Shenzhen</div>
-      <ul>
-        <li>Led the migration and development of core logistics systems using <strong>.NET Core</strong>.</li>
-        <li>Architected high-availability solutions using <strong>Consul</strong> (Service Discovery), <strong>Ocelot</strong> (Gateway), and <strong>RabbitMQ</strong>.</li>
-        <li>Implemented <strong>MinIO</strong> for distributed object storage and <strong>ELK Stack</strong> for comprehensive monitoring.</li>
-      </ul>
-    </div>
-
-    <div class="job-item">
-      <div class="job-header">
-        <span class="job-title">Golang Engineer (Distributed Backend)</span>
-        <span class="job-date">2020.07 – 2021.03</span>
-      </div>
-      <div class="job-company">Guangzhou Lizhao Network</div>
-      <ul>
-        <li>Architected the backend for "Immortal Continent" using <strong>Golang</strong> with a Skynet-like Actor model.</li>
-        <li>Boosted gateway performance by <strong>80%</strong> using NATS messaging.</li>
-        <li>Optimized memory and search using <strong>Ctrie</strong> and <strong>Compressed Bitmaps</strong>.</li>
-      </ul>
-    </div>
-
-    <div class="job-item">
-      <div class="job-header">
-        <span class="job-title">Game Server Developer</span>
-        <span class="job-date">2018.08 – 2020.01</span>
-      </div>
-      <div class="job-company">Guangzhou Zhuoyou Technology</div>
-      <ul>
-        <li>Developed backend for "Pure White Witch" (Square Enix IP) using PHP and C++.</li>
-        <li>Implemented cross-platform account linking and anti-cheat mechanisms.</li>
-      </ul>
-    </div>
-    
-     <div class="job-item">
-      <div class="job-header">
-        <span class="job-title">.NET Software Engineer</span>
-        <span class="job-date">2016.07 – 2018.05</span>
-      </div>
-      <div class="job-company">Gels Logistics Inc. (US Based)</div>
-      <ul>
-        <li>Full-stack development with .NET and Angular.</li>
-        <li>Optimized SQL performance by 50%+ through execution plan analysis and indexing strategies.</li>
-      </ul>
-    </div>
-
-  </div>
-
-  <div class="resume-section">
-    <h2>🎓 Education</h2>
-    <div class="job-item">
-      <div class="job-header">
-        <span class="job-title">Western Oregon University (USA)</span>
-        <span class="job-date">2013 – 2015</span>
-      </div>
-      <div class="job-company">B.S. in Computer Science</div>
-    </div>
-    <div class="job-item">
-      <div class="job-header">
-        <span class="job-title">Dalian Polytechnic University</span>
-        <span class="job-date">2011 – 2013</span>
-      </div>
-      <div class="job-company">B.S. in Computer Science</div>
-    </div>
-  </div>
-
-</div>
+  <script>
+    function switchLang(lang) {
+      const contents = document.querySelectorAll('.lang-content');
+      const buttons = document.querySelectorAll('.lang-btn');
+      
+      contents.forEach(content => content.classList.remove('active'));
+      buttons.forEach(btn => btn.classList.remove('active'));
+      
+      document.getElementById(lang).classList.add('active');
+      event.target.classList.add('active');
+    }
+  </script>
+</body>
+</html>
