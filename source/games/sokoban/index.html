@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sokoban Game</title>
+    <title>Sokoban - Clayton Game Center</title>
     <style>
         * {
             margin: 0;
@@ -12,49 +12,211 @@
         }
         
         body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #4a6741 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        
+        .header {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #aaa;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 8px 16px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .back-btn:hover {
+            background: rgba(255,255,255,0.2);
+            color: #fff;
+        }
+        
+        .game-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2ecc71;
+        }
+        
+        .header-right {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .stat-box {
+            background: rgba(255,255,255,0.1);
+            padding: 8px 14px;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 70px;
+        }
+        
+        .stat-label {
+            font-size: 10px;
+            color: #888;
+            text-transform: uppercase;
+        }
+        
+        .stat-value {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2ecc71;
+        }
+        
+        .main-container {
             display: flex;
             justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #2c3e50 0%, #4a6741 100%);
-            font-family: 'Arial', sans-serif;
+            align-items: flex-start;
+            padding: 25px;
+            gap: 25px;
+            max-width: 1100px;
+            margin: 0 auto;
         }
         
-        .game-container {
-            text-align: center;
+        .game-frame {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            padding: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
         
-        h1 {
-            color: #ecf0f1;
-            margin-bottom: 10px;
-            font-size: 36px;
-        }
-        
-        .level-info {
-            color: #bdc3c7;
-            margin-bottom: 15px;
-            font-size: 18px;
+        .game-canvas-wrapper {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 3px solid #7f8c8d;
+            box-shadow: 0 0 20px rgba(127, 140, 141, 0.3);
         }
         
         #gameCanvas {
-            border: 4px solid #7f8c8d;
-            border-radius: 8px;
-            background: #34495e;
+            display: block;
         }
         
-        .controls {
+        .side-panel {
+            width: 260px;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .panel-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 18px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .panel-title {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .game-icon {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 10px;
-            margin-top: 20px;
-            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            background: rgba(0,0,0,0.2);
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-item-label {
+            font-size: 11px;
+            color: #888;
+        }
+        
+        .stat-item-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2ecc71;
+        }
+        
+        .controls-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .control-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .key {
+            background: rgba(255,255,255,0.1);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 11px;
+            min-width: 50px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .control-desc {
+            color: #aaa;
+            font-size: 12px;
+        }
+        
+        .tips-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        
+        .tip-item {
+            color: #aaa;
+            font-size: 12px;
+            padding-left: 12px;
+            position: relative;
+        }
+        
+        .tip-item::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #2ecc71;
         }
         
         .btn {
             background: #3498db;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 10px 16px;
             border-radius: 6px;
             font-size: 14px;
             cursor: pointer;
@@ -63,43 +225,20 @@
         
         .btn:hover {
             background: #2980b9;
-            transform: translateY(-2px);
         }
         
         .btn:disabled {
             background: #7f8c8d;
             cursor: not-allowed;
-            transform: none;
         }
         
-        .instructions {
-            color: #bdc3c7;
-            margin-top: 15px;
-            font-size: 13px;
+        .level-buttons {
+            display: flex;
+            gap: 8px;
         }
         
-        .instructions kbd {
-            background: rgba(255,255,255,0.1);
-            padding: 2px 6px;
-            border-radius: 3px;
-            border: 1px solid #555;
-        }
-        
-        .back-link {
-            display: inline-block;
-            margin-top: 15px;
-            color: #3498db;
-            text-decoration: none;
-            padding: 8px 16px;
-            border: 2px solid #3498db;
-            border-radius: 6px;
-            font-size: 14px;
-            transition: all 0.3s;
-        }
-        
-        .back-link:hover {
-            background: #3498db;
-            color: white;
+        .level-buttons .btn {
+            flex: 1;
         }
         
         .message {
@@ -115,6 +254,7 @@
             font-weight: bold;
             display: none;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            z-index: 100;
         }
         
         .message.show {
@@ -126,22 +266,104 @@
             0% { transform: translate(-50%, -50%) scale(0); }
             100% { transform: translate(-50%, -50%) scale(1); }
         }
+        
+        @media (max-width: 900px) {
+            .main-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .side-panel {
+                width: 100%;
+                max-width: 400px;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="game-container">
-        <h1>Sokoban 推箱子</h1>
-        <div class="level-info">关卡: <span id="level">1</span> / 10 | 步数: <span id="moves">0</span></div>
-        <canvas id="gameCanvas" width="480" height="480"></canvas>
-        <div class="controls">
-            <button class="btn" id="prevBtn" onclick="prevLevel()">上一关</button>
-            <button class="btn" onclick="resetLevel()">重置关卡</button>
-            <button class="btn" id="nextBtn" onclick="nextLevel()">下一关</button>
+    <header class="header">
+        <div class="header-left">
+            <a href="/games/" class="back-btn">← 返回</a>
+            <span class="game-title">🎮 Sokoban 推箱子</span>
         </div>
-        <div class="instructions">
-            <kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> 或 <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> 移动 | <kbd>R</kbd> 重置
+        <div class="header-right">
+            <div class="stat-box">
+                <div class="stat-label">关卡</div>
+                <div class="stat-value" id="levelHeader">1/10</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">步数</div>
+                <div class="stat-value" id="movesHeader">0</div>
+            </div>
         </div>
-        <a href="/games/" class="back-link">返回游戏列表</a>
+    </header>
+    
+    <div class="main-container">
+        <div class="game-frame">
+            <div class="game-canvas-wrapper">
+                <canvas id="gameCanvas" width="400" height="400"></canvas>
+            </div>
+        </div>
+        
+        <div class="side-panel">
+            <div class="panel-card">
+                <div class="game-icon">📦</div>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-item-label">关卡</div>
+                        <div class="stat-item-value" id="level">1/10</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-item-label">步数</div>
+                        <div class="stat-item-value" id="moves">0</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-item-label">剩余</div>
+                        <div class="stat-item-value" id="remaining">0</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-item-label">完成</div>
+                        <div class="stat-item-value" id="completed">0</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="panel-card">
+                <div class="panel-title">关卡选择</div>
+                <div class="level-buttons">
+                    <button class="btn" id="prevBtn" onclick="prevLevel()">上一关</button>
+                    <button class="btn" onclick="resetLevel()">重置</button>
+                    <button class="btn" id="nextBtn" onclick="nextLevel()">下一关</button>
+                </div>
+            </div>
+            
+            <div class="panel-card">
+                <div class="panel-title">操作说明</div>
+                <div class="controls-list">
+                    <div class="control-item">
+                        <span class="key">↑ ↓ ← →</span>
+                        <span class="control-desc">移动角色</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">W A S D</span>
+                        <span class="control-desc">移动角色</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">R</span>
+                        <span class="control-desc">重置关卡</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="panel-card">
+                <div class="panel-title">游戏技巧</div>
+                <div class="tips-list">
+                    <div class="tip-item">把所有箱子推到目标点</div>
+                    <div class="tip-item">箱子只能推不能拉</div>
+                    <div class="tip-item">避免把箱子推到死角</div>
+                </div>
+            </div>
+        </div>
     </div>
     
     <div class="message" id="message">关卡完成！</div>
@@ -149,7 +371,7 @@
     <script>
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
-        const TILE_SIZE = 48;
+        const TILE_SIZE = 40;
         
         const EMPTY = 0;
         const WALL = 1;
@@ -338,39 +560,39 @@
                         ctx.fillStyle = '#7f8c8d';
                         ctx.fillRect(px, py, TILE_SIZE, TILE_SIZE);
                         ctx.fillStyle = '#95a5a6';
-                        ctx.fillRect(px + 4, py + 4, TILE_SIZE - 8, TILE_SIZE - 8);
+                        ctx.fillRect(px + 3, py + 3, TILE_SIZE - 6, TILE_SIZE - 6);
                     } else if (tile === TARGET || tile === PLAYER_ON_TARGET) {
                         ctx.fillStyle = '#e74c3c';
                         ctx.beginPath();
-                        ctx.arc(px + TILE_SIZE/2, py + TILE_SIZE/2, 12, 0, Math.PI * 2);
+                        ctx.arc(px + TILE_SIZE/2, py + TILE_SIZE/2, 10, 0, Math.PI * 2);
                         ctx.fill();
                     }
                     
                     if (tile === BOX) {
                         ctx.fillStyle = '#f39c12';
-                        ctx.fillRect(px + 6, py + 6, TILE_SIZE - 12, TILE_SIZE - 12);
+                        ctx.fillRect(px + 5, py + 5, TILE_SIZE - 10, TILE_SIZE - 10);
                         ctx.strokeStyle = '#d68910';
-                        ctx.lineWidth = 3;
-                        ctx.strokeRect(px + 6, py + 6, TILE_SIZE - 12, TILE_SIZE - 12);
+                        ctx.lineWidth = 2;
+                        ctx.strokeRect(px + 5, py + 5, TILE_SIZE - 10, TILE_SIZE - 10);
                     } else if (tile === BOX_ON_TARGET) {
                         ctx.fillStyle = '#27ae60';
-                        ctx.fillRect(px + 6, py + 6, TILE_SIZE - 12, TILE_SIZE - 12);
+                        ctx.fillRect(px + 5, py + 5, TILE_SIZE - 10, TILE_SIZE - 10);
                         ctx.strokeStyle = '#1e8449';
-                        ctx.lineWidth = 3;
-                        ctx.strokeRect(px + 6, py + 6, TILE_SIZE - 12, TILE_SIZE - 12);
+                        ctx.lineWidth = 2;
+                        ctx.strokeRect(px + 5, py + 5, TILE_SIZE - 10, TILE_SIZE - 10);
                     }
                     
                     if (tile === PLAYER || tile === PLAYER_ON_TARGET) {
                         ctx.fillStyle = '#3498db';
                         ctx.beginPath();
-                        ctx.arc(px + TILE_SIZE/2, py + TILE_SIZE/2, 16, 0, Math.PI * 2);
+                        ctx.arc(px + TILE_SIZE/2, py + TILE_SIZE/2, 14, 0, Math.PI * 2);
                         ctx.fill();
                         ctx.fillStyle = '#2980b9';
                         ctx.beginPath();
-                        ctx.arc(px + TILE_SIZE/2 - 4, py + TILE_SIZE/2 - 4, 4, 0, Math.PI * 2);
+                        ctx.arc(px + TILE_SIZE/2 - 4, py + TILE_SIZE/2 - 4, 3, 0, Math.PI * 2);
                         ctx.fill();
                         ctx.beginPath();
-                        ctx.arc(px + TILE_SIZE/2 + 4, py + TILE_SIZE/2 - 4, 4, 0, Math.PI * 2);
+                        ctx.arc(px + TILE_SIZE/2 + 4, py + TILE_SIZE/2 - 4, 3, 0, Math.PI * 2);
                         ctx.fill();
                     }
                 }
@@ -453,8 +675,21 @@
         }
         
         function updateUI() {
-            document.getElementById('level').textContent = currentLevel + 1;
+            let remaining = 0;
+            let completed = 0;
+            for (let y = 0; y < map.length; y++) {
+                for (let x = 0; x < map[y].length; x++) {
+                    if (map[y][x] === BOX) remaining++;
+                    if (map[y][x] === BOX_ON_TARGET) completed++;
+                }
+            }
+            
+            document.getElementById('level').textContent = (currentLevel + 1) + '/10';
             document.getElementById('moves').textContent = moves;
+            document.getElementById('remaining').textContent = remaining;
+            document.getElementById('completed').textContent = completed;
+            document.getElementById('levelHeader').textContent = (currentLevel + 1) + '/10';
+            document.getElementById('movesHeader').textContent = moves;
             document.getElementById('prevBtn').disabled = currentLevel === 0;
             document.getElementById('nextBtn').disabled = currentLevel === levels.length - 1;
         }

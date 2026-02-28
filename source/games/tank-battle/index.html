@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tank Battle Game</title>
+    <title>Tank Battle - Clayton Game Center</title>
     <style>
         * {
             margin: 0;
@@ -12,105 +12,313 @@
         }
         
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             min-height: 100vh;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            font-family: 'Arial', sans-serif;
+            color: #fff;
         }
         
-        .game-container {
-            text-align: center;
-        }
-        
-        h1 {
-            color: #00ff88;
-            margin-bottom: 20px;
-            text-shadow: 0 0 10px #00ff88;
-            font-size: 32px;
-        }
-        
-        #gameCanvas {
-            border: 4px solid #00ff88;
-            border-radius: 5px;
-            box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
-        }
-        
-        .info-panel {
+        .header {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            padding: 15px 30px;
             display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 20px;
-            color: white;
-            font-size: 16px;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
         
-        .info-item {
-            background: rgba(0, 255, 136, 0.1);
-            padding: 10px 20px;
-            border-radius: 8px;
-            border: 1px solid rgba(0, 255, 136, 0.3);
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
         
-        .info-item span {
-            color: #00ff88;
-            font-weight: bold;
-        }
-        
-        .controls {
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
             color: #aaa;
-            margin-top: 15px;
-            font-size: 14px;
-            line-height: 1.8;
-        }
-        
-        .controls kbd {
-            background: rgba(255,255,255,0.1);
-            padding: 3px 8px;
-            border-radius: 4px;
-            border: 1px solid #555;
-        }
-        
-        .back-link {
-            display: inline-block;
-            margin-top: 20px;
-            color: #00ff88;
             text-decoration: none;
-            padding: 10px 20px;
-            background: rgba(0, 255, 136, 0.1);
+            font-size: 14px;
+            padding: 8px 16px;
+            background: rgba(255,255,255,0.1);
             border-radius: 8px;
-            border: 1px solid rgba(0, 255, 136, 0.3);
             transition: all 0.3s;
         }
         
-        .back-link:hover {
-            background: rgba(0, 255, 136, 0.2);
+        .back-btn:hover {
+            background: rgba(255,255,255,0.2);
+            color: #fff;
+        }
+        
+        .game-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #00ff88;
+        }
+        
+        .header-right {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .stat-box {
+            background: rgba(255,255,255,0.1);
+            padding: 8px 14px;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 70px;
+        }
+        
+        .stat-label {
+            font-size: 10px;
+            color: #888;
+            text-transform: uppercase;
+        }
+        
+        .stat-value {
+            font-size: 16px;
+            font-weight: bold;
+            color: #00ff88;
+        }
+        
+        .main-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 25px;
+            gap: 25px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        
+        .game-frame {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            padding: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .game-canvas-wrapper {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 3px solid #00ff88;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+        }
+        
+        #gameCanvas {
+            display: block;
+        }
+        
+        .side-panel {
+            width: 260px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .panel-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 18px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .panel-title {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .game-icon {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        
+        .stat-item {
+            background: rgba(0,0,0,0.2);
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-item-label {
+            font-size: 11px;
+            color: #888;
+        }
+        
+        .stat-item-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: #00ff88;
+        }
+        
+        .controls-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .control-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .key {
+            background: rgba(255,255,255,0.1);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 11px;
+            min-width: 50px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .control-desc {
+            color: #aaa;
+            font-size: 12px;
+        }
+        
+        .tips-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        
+        .tip-item {
+            color: #aaa;
+            font-size: 12px;
+            padding-left: 12px;
+            position: relative;
+        }
+        
+        .tip-item::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #00ff88;
+        }
+        
+        @media (max-width: 1000px) {
+            .main-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .side-panel {
+                width: 100%;
+                max-width: 480px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="game-container">
-        <h1>Tank Battle</h1>
-        <canvas id="gameCanvas" width="640" height="640"></canvas>
-        <div class="info-panel">
-            <div class="info-item">生命: <span id="lives">3</span></div>
-            <div class="info-item">分数: <span id="score">0</span></div>
-            <div class="info-item">关卡: <span id="level">1</span></div>
-            <div class="info-item">敌人: <span id="enemies">0</span></div>
+    <header class="header">
+        <div class="header-left">
+            <a href="/games/" class="back-btn">← 返回</a>
+            <span class="game-title">🎮 Tank Battle</span>
         </div>
-        <div class="controls">
-            <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> 或 方向键移动 | 
-            <kbd>空格</kbd> 或 <kbd>J</kbd> 发射子弹 | 
-            <kbd>R</kbd> 重新开始
+        <div class="header-right">
+            <div class="stat-box">
+                <div class="stat-label">生命</div>
+                <div class="stat-value" id="lives">3</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">分数</div>
+                <div class="stat-value" id="score">0</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">关卡</div>
+                <div class="stat-value" id="level">1</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">敌人</div>
+                <div class="stat-value" id="enemies">0</div>
+            </div>
         </div>
-        <a href="/games/" class="back-link">返回游戏列表</a>
+    </header>
+    
+    <div class="main-container">
+        <div class="game-frame">
+            <div class="game-canvas-wrapper">
+                <canvas id="gameCanvas" width="480" height="480"></canvas>
+            </div>
+        </div>
+        
+        <div class="side-panel">
+            <div class="panel-card">
+                <div class="game-icon">🎮</div>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-item-label">生命</div>
+                        <div class="stat-item-value" id="livesBig">3</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-item-label">分数</div>
+                        <div class="stat-item-value" id="scoreBig">0</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-item-label">关卡</div>
+                        <div class="stat-item-value" id="levelBig">1</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-item-label">目标</div>
+                        <div class="stat-item-value" id="target">500</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="panel-card">
+                <div class="panel-title">操作说明</div>
+                <div class="controls-list">
+                    <div class="control-item">
+                        <span class="key">W A S D</span>
+                        <span class="control-desc">移动坦克</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">方向键</span>
+                        <span class="control-desc">移动坦克</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">空格 / J</span>
+                        <span class="control-desc">发射子弹</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">R</span>
+                        <span class="control-desc">重新开始</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="panel-card">
+                <div class="panel-title">游戏技巧</div>
+                <div class="tips-list">
+                    <div class="tip-item">保护基地不被摧毁</div>
+                    <div class="tip-item">利用墙壁作为掩护</div>
+                    <div class="tip-item">消灭敌人获得100分</div>
+                    <div class="tip-item">达到目标分数过关</div>
+                </div>
+            </div>
+        </div>
     </div>
     
     <script>
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
-        const TILE_SIZE = 32;
+        const TILE_SIZE = 24;
         const MAP_WIDTH = 20;
         const MAP_HEIGHT = 20;
         
@@ -126,9 +334,9 @@
         const player = {
             x: TILE_SIZE * 9,
             y: TILE_SIZE * 18,
-            width: TILE_SIZE - 4,
-            height: TILE_SIZE - 4,
-            speed: 3,
+            width: TILE_SIZE - 2,
+            height: TILE_SIZE - 2,
+            speed: 2.5,
             direction: 'up',
             color: '#00ff88',
             lastShot: 0,
@@ -189,18 +397,18 @@
             ctx.rotate(angles[tank.direction] * Math.PI / 180);
             
             ctx.fillStyle = tank.color;
-            ctx.fillRect(-tank.width / 2 + 4, -tank.height / 2, tank.width - 8, tank.height);
+            ctx.fillRect(-tank.width / 2 + 3, -tank.height / 2, tank.width - 6, tank.height);
             
             ctx.fillStyle = isPlayer ? '#00cc66' : '#cc4444';
-            ctx.fillRect(-tank.width / 2, -tank.height / 2 + 4, 4, tank.height - 8);
-            ctx.fillRect(tank.width / 2 - 4, -tank.height / 2 + 4, 4, tank.height - 8);
+            ctx.fillRect(-tank.width / 2, -tank.height / 2 + 3, 3, tank.height - 6);
+            ctx.fillRect(tank.width / 2 - 3, -tank.height / 2 + 3, 3, tank.height - 6);
             
             ctx.fillStyle = isPlayer ? '#00ff88' : '#ff6666';
-            ctx.fillRect(-4, -tank.height / 2 - 8, 8, tank.height / 2 + 8);
+            ctx.fillRect(-3, -tank.height / 2 - 6, 6, tank.height / 2 + 6);
             
             ctx.fillStyle = '#333';
             ctx.beginPath();
-            ctx.arc(0, 4, 8, 0, Math.PI * 2);
+            ctx.arc(0, 3, 6, 0, Math.PI * 2);
             ctx.fill();
             
             ctx.restore();
@@ -214,7 +422,7 @@
                     ctx.strokeStyle = '#654321';
                     ctx.lineWidth = 1;
                     for (let i = 0; i < 4; i++) {
-                        ctx.strokeRect(wall.x, wall.y + i * 8, wall.width, 8);
+                        ctx.strokeRect(wall.x, wall.y + i * 6, wall.width, 6);
                     }
                 }
             });
@@ -224,18 +432,18 @@
             ctx.fillStyle = '#FFD700';
             ctx.fillRect(base.x, base.y, base.width, base.height);
             ctx.fillStyle = '#FFA500';
-            ctx.font = '12px Arial';
+            ctx.font = '10px Arial';
             ctx.textAlign = 'center';
-            ctx.fillText('BASE', base.x + base.width / 2, base.y + base.height / 2 + 4);
+            ctx.fillText('BASE', base.x + base.width / 2, base.y + base.height / 2 + 3);
         }
         
         function drawBullets() {
             bullets.forEach(bullet => {
                 ctx.fillStyle = bullet.isPlayer ? '#00ffff' : '#ff4444';
                 ctx.shadowColor = bullet.isPlayer ? '#00ffff' : '#ff4444';
-                ctx.shadowBlur = 10;
+                ctx.shadowBlur = 8;
                 ctx.beginPath();
-                ctx.arc(bullet.x, bullet.y, 4, 0, Math.PI * 2);
+                ctx.arc(bullet.x, bullet.y, 3, 0, Math.PI * 2);
                 ctx.fill();
                 ctx.shadowBlur = 0;
             });
@@ -246,7 +454,7 @@
                 const exp = explosions[i];
                 ctx.fillStyle = `rgba(255, ${100 + exp.life * 5}, 0, ${exp.life / 20})`;
                 ctx.beginPath();
-                ctx.arc(exp.x, exp.y, (20 - exp.life) * 2, 0, Math.PI * 2);
+                ctx.arc(exp.x, exp.y, (20 - exp.life) * 1.5, 0, Math.PI * 2);
                 ctx.fill();
                 
                 exp.life--;
@@ -282,14 +490,14 @@
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 
                 ctx.fillStyle = '#ff4444';
-                ctx.font = 'bold 48px Arial';
+                ctx.font = 'bold 36px Arial';
                 ctx.textAlign = 'center';
-                ctx.fillText('GAME OVER', canvas.width / 2, canvas.height / 2 - 30);
+                ctx.fillText('GAME OVER', canvas.width / 2, canvas.height / 2 - 20);
                 
                 ctx.fillStyle = '#00ff88';
-                ctx.font = '24px Arial';
-                ctx.fillText(`最终分数: ${score}`, canvas.width / 2, canvas.height / 2 + 20);
-                ctx.fillText('按 R 重新开始', canvas.width / 2, canvas.height / 2 + 60);
+                ctx.font = '18px Arial';
+                ctx.fillText(`分数: ${score}`, canvas.width / 2, canvas.height / 2 + 20);
+                ctx.fillText('按 R 重新开始', canvas.width / 2, canvas.height / 2 + 50);
             }
             
             if (gameState === 'victory') {
@@ -297,14 +505,14 @@
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 
                 ctx.fillStyle = '#00ff88';
-                ctx.font = 'bold 48px Arial';
+                ctx.font = 'bold 36px Arial';
                 ctx.textAlign = 'center';
-                ctx.fillText('VICTORY!', canvas.width / 2, canvas.height / 2 - 30);
+                ctx.fillText('VICTORY!', canvas.width / 2, canvas.height / 2 - 20);
                 
                 ctx.fillStyle = '#FFD700';
-                ctx.font = '24px Arial';
+                ctx.font = '18px Arial';
                 ctx.fillText(`分数: ${score}`, canvas.width / 2, canvas.height / 2 + 20);
-                ctx.fillText('按 R 进入下一关', canvas.width / 2, canvas.height / 2 + 60);
+                ctx.fillText('按 R 进入下一关', canvas.width / 2, canvas.height / 2 + 50);
             }
         }
         
@@ -364,7 +572,7 @@
         }
         
         function shoot(tank, isPlayer) {
-            const bulletSpeed = 6;
+            const bulletSpeed = 5;
             let bx = tank.x + tank.width / 2;
             let by = tank.y + tank.height / 2;
             let vx = 0, vy = 0;
@@ -454,9 +662,9 @@
                 enemies.push({
                     x: spawn.x,
                     y: spawn.y,
-                    width: TILE_SIZE - 4,
-                    height: TILE_SIZE - 4,
-                    speed: 1.5,
+                    width: TILE_SIZE - 2,
+                    height: TILE_SIZE - 2,
+                    speed: 1.2,
                     direction: 'down',
                     color: '#ff4444',
                     lastShot: 0,
@@ -508,6 +716,10 @@
             document.getElementById('score').textContent = score;
             document.getElementById('level').textContent = level;
             document.getElementById('enemies').textContent = enemyCount;
+            document.getElementById('livesBig').textContent = lives;
+            document.getElementById('scoreBig').textContent = score;
+            document.getElementById('levelBig').textContent = level;
+            document.getElementById('target').textContent = level * 500;
         }
         
         function resetGame() {
@@ -564,6 +776,7 @@
         }
         
         initMap();
+        updateUI();
         gameLoop();
     </script>
 </body>
