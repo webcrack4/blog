@@ -27,8 +27,10 @@ category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
+  - index.html
   - resume.html
   - games/**
+  - stock/**
   - home/**
 
 # Writing
