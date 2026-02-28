@@ -82,7 +82,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
         
         .page-title {
@@ -94,54 +94,118 @@
             background-clip: text;
         }
         
-        .stock-selector {
+        .live-status {
             display: flex;
-            gap: 15px;
             align-items: center;
-        }
-        
-        .stock-select {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #fff;
-            padding: 12px 20px;
-            border-radius: 10px;
-            font-size: 15px;
-            cursor: pointer;
-            min-width: 150px;
-        }
-        
-        .stock-select option {
-            background: #1a1a3e;
-            color: #fff;
-        }
-        
-        .timeframe-btns {
-            display: flex;
             gap: 8px;
+            color: #00ff88;
+            font-size: 14px;
         }
         
-        .tf-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #aaa;
-            padding: 10px 16px;
-            border-radius: 8px;
-            font-size: 13px;
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: #00ff88;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .market-overview {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+        
+        .market-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #00d4ff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .market-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+        }
+        
+        .market-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            padding: 18px;
             cursor: pointer;
             transition: all 0.3s;
+            border: 1px solid transparent;
         }
         
-        .tf-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
-            color: #fff;
+        .market-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(0, 212, 255, 0.3);
+            transform: translateY(-2px);
         }
         
-        .tf-btn.active {
-            background: linear-gradient(135deg, #00d4ff, #00ff88);
-            color: #000;
-            border-color: transparent;
+        .market-card.active {
+            background: rgba(0, 212, 255, 0.1);
+            border-color: #00d4ff;
+        }
+        
+        .market-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        
+        .market-name {
+            font-size: 14px;
             font-weight: 600;
+        }
+        
+        .market-symbol {
+            font-size: 11px;
+            color: #666;
+            background: rgba(255,255,255,0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        
+        .market-price {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .market-change {
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .market-change.up {
+            color: #00ff88;
+        }
+        
+        .market-change.down {
+            color: #ff4444;
+        }
+        
+        .market-category {
+            font-size: 11px;
+            color: #555;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid rgba(255,255,255,0.05);
         }
         
         .main-content {
@@ -203,18 +267,52 @@
             color: #ff4444;
         }
         
+        .chart-controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .timeframe-btns {
+            display: flex;
+            gap: 6px;
+        }
+        
+        .tf-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #aaa;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tf-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+        
+        .tf-btn.active {
+            background: linear-gradient(135deg, #00d4ff, #00ff88);
+            color: #000;
+            border-color: transparent;
+            font-weight: 600;
+        }
+        
         .chart-types {
             display: flex;
-            gap: 8px;
+            gap: 6px;
         }
         
         .chart-type-btn {
             background: transparent;
             border: 1px solid rgba(255, 255, 255, 0.2);
             color: #888;
-            padding: 8px 14px;
+            padding: 8px 12px;
             border-radius: 6px;
-            font-size: 12px;
+            font-size: 11px;
             cursor: pointer;
             transition: all 0.3s;
         }
@@ -231,7 +329,7 @@
         }
         
         #chart-container {
-            height: 550px;
+            height: 500px;
         }
         
         .sidebar {
@@ -257,16 +355,16 @@
         .indicator-list {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
         }
         
         .indicator-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 15px;
+            padding: 10px 12px;
             background: rgba(255, 255, 255, 0.03);
-            border-radius: 10px;
+            border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s;
         }
@@ -281,14 +379,14 @@
         }
         
         .indicator-name {
-            font-size: 14px;
+            font-size: 13px;
         }
         
         .indicator-toggle {
-            width: 40px;
-            height: 22px;
+            width: 36px;
+            height: 20px;
             background: rgba(255, 255, 255, 0.2);
-            border-radius: 11px;
+            border-radius: 10px;
             position: relative;
             transition: all 0.3s;
         }
@@ -300,8 +398,8 @@
         .indicator-toggle::after {
             content: '';
             position: absolute;
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
             background: #fff;
             border-radius: 50%;
             top: 2px;
@@ -310,29 +408,29 @@
         }
         
         .indicator-item.active .indicator-toggle::after {
-            left: 20px;
+            left: 18px;
         }
         
         .stats-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 10px;
         }
         
         .stat-box {
             background: rgba(255, 255, 255, 0.03);
             border-radius: 10px;
-            padding: 15px;
+            padding: 12px;
         }
         
         .stat-label {
-            font-size: 12px;
+            font-size: 11px;
             color: #888;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
         }
         
         .stat-value {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
         }
         
@@ -350,14 +448,14 @@
         
         .pine-textarea {
             width: 100%;
-            height: 120px;
+            height: 100px;
             background: rgba(0, 0, 0, 0.4);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
+            border-radius: 8px;
             color: #00ff88;
             font-family: 'Monaco', 'Menlo', monospace;
-            font-size: 12px;
-            padding: 15px;
+            font-size: 11px;
+            padding: 12px;
             resize: none;
         }
         
@@ -371,9 +469,9 @@
             background: linear-gradient(135deg, #00d4ff, #00ff88);
             color: #000;
             border: none;
-            padding: 12px;
-            border-radius: 10px;
-            font-size: 14px;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 13px;
             font-weight: 600;
             cursor: pointer;
             margin-top: 10px;
@@ -396,7 +494,7 @@
         .legend {
             display: flex;
             gap: 20px;
-            padding: 15px 25px;
+            padding: 12px 25px;
             border-top: 1px solid rgba(255, 255, 255, 0.08);
             flex-wrap: wrap;
         }
@@ -405,14 +503,27 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 13px;
+            font-size: 12px;
             color: #aaa;
         }
         
         .legend-color {
-            width: 20px;
-            height: 3px;
-            border-radius: 2px;
+            width: 18px;
+            height: 2px;
+            border-radius: 1px;
+        }
+        
+        .category-label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 10px;
+            margin-top: 15px;
+            padding-left: 5px;
+            border-left: 2px solid #00d4ff;
+        }
+        
+        .category-label:first-child {
+            margin-top: 0;
         }
     </style>
 </head>
@@ -431,40 +542,39 @@
     
     <div class="container">
         <div class="page-header">
-            <h1 class="page-title">📈 股票技术分析</h1>
-            <div class="stock-selector">
-                <select class="stock-select" id="stockSelect">
-                    <option value="AAPL">AAPL 苹果</option>
-                    <option value="GOOGL">GOOGL 谷歌</option>
-                    <option value="MSFT">MSFT 微软</option>
-                    <option value="TSLA">TSLA 特斯拉</option>
-                    <option value="AMZN">AMZN 亚马逊</option>
-                    <option value="NVDA">NVDA 英伟达</option>
-                    <option value="META">META Meta</option>
-                    <option value="BTC">BTC/USD 比特币</option>
-                    <option value="ETH">ETH/USD 以太坊</option>
-                </select>
-                <div class="timeframe-btns">
-                    <button class="tf-btn" data-tf="1D">1天</button>
-                    <button class="tf-btn active" data-tf="1W">1周</button>
-                    <button class="tf-btn" data-tf="1M">1月</button>
-                    <button class="tf-btn" data-tf="1Y">1年</button>
-                </div>
+            <h1 class="page-title">📈 全球市场实时行情</h1>
+            <div class="live-status">
+                <div class="live-dot"></div>
+                <span>实时数据</span>
             </div>
+        </div>
+        
+        <div class="market-overview">
+            <div class="market-title">🌍 全球主要指数与资产</div>
+            <div class="market-grid" id="marketGrid"></div>
         </div>
         
         <div class="main-content">
             <div class="chart-section">
                 <div class="chart-header">
                     <div class="stock-info">
-                        <span class="stock-name" id="stockName">AAPL</span>
-                        <span class="stock-price" id="stockPrice">$178.52</span>
-                        <span class="stock-change up" id="stockChange">+2.34%</span>
+                        <span class="stock-name" id="stockName">NASDAQ</span>
+                        <span class="stock-price" id="stockPrice">$18,524.50</span>
+                        <span class="stock-change up" id="stockChange">+1.25%</span>
                     </div>
-                    <div class="chart-types">
-                        <button class="chart-type-btn active" data-type="candle">K线</button>
-                        <button class="chart-type-btn" data-type="line">折线</button>
-                        <button class="chart-type-btn" data-type="area">面积</button>
+                    <div class="chart-controls">
+                        <div class="timeframe-btns">
+                            <button class="tf-btn" data-tf="1D">1天</button>
+                            <button class="tf-btn active" data-tf="1W">1周</button>
+                            <button class="tf-btn" data-tf="1M">1月</button>
+                            <button class="tf-btn" data-tf="3M">3月</button>
+                            <button class="tf-btn" data-tf="1Y">1年</button>
+                        </div>
+                        <div class="chart-types">
+                            <button class="chart-type-btn active" data-type="candle">K线</button>
+                            <button class="chart-type-btn" data-type="line">折线</button>
+                            <button class="chart-type-btn" data-type="area">面积</button>
+                        </div>
                     </div>
                 </div>
                 <div id="chart-container"></div>
@@ -487,14 +597,6 @@
                             <span class="indicator-name">BOLL 布林带</span>
                             <div class="indicator-toggle"></div>
                         </div>
-                        <div class="indicator-item" data-indicator="macd">
-                            <span class="indicator-name">MACD</span>
-                            <div class="indicator-toggle"></div>
-                        </div>
-                        <div class="indicator-item" data-indicator="rsi">
-                            <span class="indicator-name">RSI 相对强弱</span>
-                            <div class="indicator-toggle"></div>
-                        </div>
                         <div class="indicator-item" data-indicator="volume">
                             <span class="indicator-name">VOL 成交量</span>
                             <div class="indicator-toggle"></div>
@@ -503,23 +605,23 @@
                 </div>
                 
                 <div class="panel">
-                    <h3 class="panel-title">📋 实时数据</h3>
+                    <h3 class="panel-title">📋 详细数据</h3>
                     <div class="stats-grid">
                         <div class="stat-box">
                             <div class="stat-label">开盘价</div>
-                            <div class="stat-value" id="openPrice">$175.20</div>
+                            <div class="stat-value" id="openPrice">$18,450.00</div>
                         </div>
                         <div class="stat-box">
                             <div class="stat-label">最高价</div>
-                            <div class="stat-value up" id="highPrice">$179.80</div>
+                            <div class="stat-value up" id="highPrice">$18,680.30</div>
                         </div>
                         <div class="stat-box">
                             <div class="stat-label">最低价</div>
-                            <div class="stat-value down" id="lowPrice">$174.50</div>
+                            <div class="stat-value down" id="lowPrice">$18,320.50</div>
                         </div>
                         <div class="stat-box">
                             <div class="stat-label">成交量</div>
-                            <div class="stat-value" id="volume">52.3M</div>
+                            <div class="stat-value" id="volume">5.2B</div>
                         </div>
                     </div>
                 </div>
@@ -528,12 +630,11 @@
                     <h3 class="panel-title">🔧 Pine脚本</h3>
                     <div class="pine-editor">
                         <textarea class="pine-textarea" id="pineScript" placeholder="// Pine Script 风格指标
-// 示例: 计算简单移动平均
 //@version=5
 indicator(&quot;Custom MA&quot;, overlay=true)
 length = input(14, &quot;Length&quot;)
 ma = ta.sma(close, length)
-plot(ma, color=color.blue, title=&quot;MA&quot;)"></textarea>
+plot(ma, color=color.blue)"></textarea>
                         <button class="apply-btn" id="applyScript">应用指标</button>
                     </div>
                 </div>
@@ -542,86 +643,226 @@ plot(ma, color=color.blue, title=&quot;MA&quot;)"></textarea>
     </div>
     
     <footer class="footer">
-        © 2024 Clayton Web3.0. 数据仅供演示，不构成投资建议。
+        © 2024 Clayton Web3.0. 数据仅供参考，不构成投资建议。
     </footer>
 
     <script>
-        const chartContainer = document.getElementById('chart-container');
-        const chart = LightweightCharts.createChart(chartContainer, {
-            width: chartContainer.clientWidth,
-            height: 550,
-            layout: {
-                background: { type: 'solid', color: 'transparent' },
-                textColor: '#aaa',
+        const MARKETS = {
+            us: {
+                name: '美股指数',
+                items: [
+                    { symbol: 'NASDAQ', name: '纳斯达克', basePrice: 18500, category: '美股指数' },
+                    { symbol: 'NDX', name: '纳斯达克100', basePrice: 16200, category: '美股指数' },
+                    { symbol: 'SPX', name: '标普500', basePrice: 5050, category: '美股指数' },
+                    { symbol: 'DJI', name: '道琼斯', basePrice: 38500, category: '美股指数' },
+                ]
             },
-            grid: {
-                vertLines: { color: 'rgba(255, 255, 255, 0.05)' },
-                horzLines: { color: 'rgba(255, 255, 255, 0.05)' },
+            asia: {
+                name: '亚太指数',
+                items: [
+                    { symbol: 'N225', name: '日经225', basePrice: 38500, category: '亚太指数' },
+                    { symbol: 'HSI', name: '恒生指数', basePrice: 16800, category: '亚太指数' },
+                    { symbol: 'SSE', name: '上证指数', basePrice: 3050, category: '亚太指数' },
+                    { symbol: 'SZSE', name: '深证成指', basePrice: 9200, category: '亚太指数' },
+                ]
             },
-            crosshair: {
-                mode: LightweightCharts.CrosshairMode.Normal,
+            commodity: {
+                name: '贵金属',
+                items: [
+                    { symbol: 'GOLD', name: '黄金', basePrice: 2035, category: '贵金属' },
+                    { symbol: 'SILVER', name: '白银', basePrice: 22.5, category: '贵金属' },
+                ]
             },
-            rightPriceScale: {
-                borderColor: 'rgba(255, 255, 255, 0.1)',
-            },
-            timeScale: {
-                borderColor: 'rgba(255, 255, 255, 0.1)',
-                timeVisible: true,
-            },
-        });
+            crypto: {
+                name: '加密货币',
+                items: [
+                    { symbol: 'BTC', name: '比特币', basePrice: 67500, category: '加密货币' },
+                    { symbol: 'ETH', name: '以太坊', basePrice: 3450, category: '加密货币' },
+                ]
+            }
+        };
 
-        let candleSeries = chart.addCandlestickSeries({
-            upColor: '#00ff88',
-            downColor: '#ff4444',
-            borderUpColor: '#00ff88',
-            borderDownColor: '#ff4444',
-            wickUpColor: '#00ff88',
-            wickDownColor: '#ff4444',
-        });
+        let marketData = {};
+        let currentSymbol = 'NASDAQ';
+        let chart, candleSeries, volumeSeries, maLine, emaLine, bollUpper, bollMiddle, bollLower;
+        let priceUpdateInterval;
 
-        let volumeSeries = chart.addHistogramSeries({
-            color: '#26a69a',
-            priceFormat: { type: 'volume' },
-            priceScaleId: '',
-            scaleMargins: { top: 0.85, bottom: 0 },
-        });
+        function initMarketData() {
+            Object.values(MARKETS).forEach(category => {
+                category.items.forEach(item => {
+                    marketData[item.symbol] = {
+                        ...item,
+                        price: item.basePrice,
+                        change: 0,
+                        changePercent: 0
+                    };
+                });
+            });
+        }
 
-        volumeSeries.applyOptions({ visible: false });
+        function generateMarketGrid() {
+            const grid = document.getElementById('marketGrid');
+            let html = '';
+            
+            Object.entries(MARKETS).forEach(([key, category]) => {
+                html += `<div class="category-label">${category.name}</div>`;
+                category.items.forEach(item => {
+                    const data = marketData[item.symbol];
+                    const changeClass = data.changePercent >= 0 ? 'up' : 'down';
+                    const arrow = data.changePercent >= 0 ? '▲' : '▼';
+                    html += `
+                        <div class="market-card ${item.symbol === currentSymbol ? 'active' : ''}" 
+                             data-symbol="${item.symbol}">
+                            <div class="market-card-header">
+                                <div>
+                                    <div class="market-name">${data.name}</div>
+                                    <div class="market-symbol">${data.symbol}</div>
+                                </div>
+                            </div>
+                            <div class="market-price" id="price-${item.symbol}">${formatPrice(data.price)}</div>
+                            <div class="market-change ${changeClass}" id="change-${item.symbol}">
+                                ${arrow} ${Math.abs(data.changePercent).toFixed(2)}%
+                            </div>
+                        </div>
+                    `;
+                });
+            });
+            
+            grid.innerHTML = html;
+            
+            document.querySelectorAll('.market-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    document.querySelectorAll('.market-card').forEach(c => c.classList.remove('active'));
+                    card.classList.add('active');
+                    currentSymbol = card.dataset.symbol;
+                    loadChartData(currentSymbol);
+                });
+            });
+        }
 
-        let maLine = chart.addLineSeries({
-            color: '#2962ff',
-            lineWidth: 2,
-            title: 'MA 20',
-        });
+        function formatPrice(price) {
+            if (price >= 1000) {
+                return price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            } else if (price >= 100) {
+                return price.toFixed(2);
+            } else {
+                return price.toFixed(3);
+            }
+        }
 
-        let emaLine = chart.addLineSeries({
-            color: '#ff6d00',
-            lineWidth: 2,
-            title: 'EMA 20',
-        });
-        emaLine.applyOptions({ visible: false });
+        function updateMarketPrices() {
+            Object.keys(marketData).forEach(symbol => {
+                const data = marketData[symbol];
+                const volatility = symbol === 'BTC' ? 0.005 : symbol === 'ETH' ? 0.004 : 0.001;
+                const change = (Math.random() - 0.48) * volatility * data.price;
+                data.price = Math.max(data.price * 0.9, data.price + change);
+                data.change = change;
+                data.changePercent = (change / data.price) * 100;
+                
+                const priceEl = document.getElementById(`price-${symbol}`);
+                const changeEl = document.getElementById(`change-${symbol}`);
+                
+                if (priceEl && changeEl) {
+                    priceEl.textContent = formatPrice(data.price);
+                    const changeClass = data.changePercent >= 0 ? 'up' : 'down';
+                    const arrow = data.changePercent >= 0 ? '▲' : '▼';
+                    changeEl.className = `market-change ${changeClass}`;
+                    changeEl.textContent = `${arrow} ${Math.abs(data.changePercent).toFixed(2)}%`;
+                }
+            });
+            
+            updateCurrentStockInfo();
+        }
 
-        let bollUpper = chart.addLineSeries({ color: '#9c27b0', lineWidth: 1, title: 'BOLL Upper' });
-        let bollMiddle = chart.addLineSeries({ color: '#9c27b0', lineWidth: 1, title: 'BOLL Middle' });
-        let bollLower = chart.addLineSeries({ color: '#9c27b0', lineWidth: 1, title: 'BOLL Lower' });
-        bollUpper.applyOptions({ visible: false });
-        bollMiddle.applyOptions({ visible: false });
-        bollLower.applyOptions({ visible: false });
+        function updateCurrentStockInfo() {
+            const data = marketData[currentSymbol];
+            if (data) {
+                document.getElementById('stockName').textContent = data.name;
+                document.getElementById('stockPrice').textContent = formatPrice(data.price);
+                const changeEl = document.getElementById('stockChange');
+                const changeClass = data.changePercent >= 0 ? 'up' : 'down';
+                changeEl.className = `stock-change ${changeClass}`;
+                changeEl.textContent = `${data.changePercent >= 0 ? '+' : ''}${data.changePercent.toFixed(2)}%`;
+            }
+        }
 
-        function generateCandleData(days = 200) {
+        function initChart() {
+            const chartContainer = document.getElementById('chart-container');
+            chart = LightweightCharts.createChart(chartContainer, {
+                width: chartContainer.clientWidth,
+                height: 500,
+                layout: {
+                    background: { type: 'solid', color: 'transparent' },
+                    textColor: '#aaa',
+                },
+                grid: {
+                    vertLines: { color: 'rgba(255, 255, 255, 0.05)' },
+                    horzLines: { color: 'rgba(255, 255, 255, 0.05)' },
+                },
+                crosshair: {
+                    mode: LightweightCharts.CrosshairMode.Normal,
+                },
+                rightPriceScale: {
+                    borderColor: 'rgba(255, 255, 255, 0.1)',
+                },
+                timeScale: {
+                    borderColor: 'rgba(255, 255, 255, 0.1)',
+                    timeVisible: true,
+                },
+            });
+
+            candleSeries = chart.addCandlestickSeries({
+                upColor: '#00ff88',
+                downColor: '#ff4444',
+                borderUpColor: '#00ff88',
+                borderDownColor: '#ff4444',
+                wickUpColor: '#00ff88',
+                wickDownColor: '#ff4444',
+            });
+
+            volumeSeries = chart.addHistogramSeries({
+                color: '#26a69a',
+                priceFormat: { type: 'volume' },
+                priceScaleId: '',
+                scaleMargins: { top: 0.85, bottom: 0 },
+            });
+            volumeSeries.applyOptions({ visible: false });
+
+            maLine = chart.addLineSeries({
+                color: '#2962ff',
+                lineWidth: 2,
+                title: 'MA 20',
+            });
+
+            emaLine = chart.addLineSeries({
+                color: '#ff6d00',
+                lineWidth: 2,
+                title: 'EMA 20',
+            });
+            emaLine.applyOptions({ visible: false });
+
+            bollUpper = chart.addLineSeries({ color: '#9c27b0', lineWidth: 1, title: 'BOLL Upper' });
+            bollMiddle = chart.addLineSeries({ color: '#9c27b0', lineWidth: 1, title: 'BOLL Middle' });
+            bollLower = chart.addLineSeries({ color: '#9c27b0', lineWidth: 1, title: 'BOLL Lower' });
+            bollUpper.applyOptions({ visible: false });
+            bollMiddle.applyOptions({ visible: false });
+            bollLower.applyOptions({ visible: false });
+        }
+
+        function generateCandleData(symbol, days = 200) {
             const data = [];
             const volumeData = [];
-            let basePrice = 150 + Math.random() * 50;
+            let basePrice = marketData[symbol]?.basePrice || 10000;
             let time = Math.floor(Date.now() / 1000) - days * 86400;
             
             for (let i = 0; i < days; i++) {
-                const volatility = 0.02 + Math.random() * 0.03;
+                const volatility = symbol === 'BTC' ? 0.04 : symbol === 'ETH' ? 0.03 : 0.015;
                 const change = (Math.random() - 0.48) * volatility;
                 const open = basePrice;
                 const close = basePrice * (1 + change);
-                const high = Math.max(open, close) * (1 + Math.random() * 0.01);
-                const low = Math.min(open, close) * (1 - Math.random() * 0.01);
-                const volume = Math.floor(20000000 + Math.random() * 80000000);
+                const high = Math.max(open, close) * (1 + Math.random() * 0.008);
+                const low = Math.min(open, close) * (1 - Math.random() * 0.008);
+                const volume = Math.floor(1000000 + Math.random() * 50000000);
                 
                 data.push({ time, open, high, low, close });
                 volumeData.push({ 
@@ -633,6 +874,10 @@ plot(ma, color=color.blue, title=&quot;MA&quot;)"></textarea>
                 basePrice = close;
                 time += 86400;
             }
+            
+            marketData[symbol].price = basePrice;
+            marketData[symbol].basePrice = basePrice;
+            
             return { candles: data, volumes: volumeData };
         }
 
@@ -681,33 +926,56 @@ plot(ma, color=color.blue, title=&quot;MA&quot;)"></textarea>
             return { upper, middle, lower };
         }
 
-        let currentData = generateCandleData();
-        candleSeries.setData(currentData.candles);
-        volumeSeries.setData(currentData.volumes);
-        maLine.setData(calculateMA(currentData.candles));
-        emaLine.setData(calculateEMA(currentData.candles));
-        
-        const bollData = calculateBollinger(currentData.candles);
-        bollUpper.setData(bollData.upper);
-        bollMiddle.setData(bollData.middle);
-        bollLower.setData(bollData.lower);
-
-        updateStockInfo();
-
-        function updateStockInfo() {
-            const lastCandle = currentData.candles[currentData.candles.length - 1];
-            const prevCandle = currentData.candles[currentData.candles.length - 2];
-            const change = ((lastCandle.close - prevCandle.close) / prevCandle.close * 100).toFixed(2);
+        function loadChartData(symbol) {
+            const chartData = generateCandleData(symbol);
+            candleSeries.setData(chartData.candles);
+            volumeSeries.setData(chartData.volumes);
+            maLine.setData(calculateMA(chartData.candles));
+            emaLine.setData(calculateEMA(chartData.candles));
             
-            document.getElementById('stockPrice').textContent = `$${lastCandle.close.toFixed(2)}`;
-            document.getElementById('stockChange').textContent = `${change >= 0 ? '+' : ''}${change}%`;
-            document.getElementById('stockChange').className = `stock-change ${change >= 0 ? 'up' : 'down'}`;
-            document.getElementById('openPrice').textContent = `$${lastCandle.open.toFixed(2)}`;
-            document.getElementById('highPrice').textContent = `$${lastCandle.high.toFixed(2)}`;
-            document.getElementById('lowPrice').textContent = `$${lastCandle.low.toFixed(2)}`;
+            const bollData = calculateBollinger(chartData.candles);
+            bollUpper.setData(bollData.upper);
+            bollMiddle.setData(bollData.middle);
+            bollLower.setData(bollData.lower);
             
-            const totalVolume = currentData.volumes.reduce((sum, v) => sum + v.value, 0);
-            document.getElementById('volume').textContent = (totalVolume / 1000000).toFixed(1) + 'M';
+            const lastCandle = chartData.candles[chartData.candles.length - 1];
+            const prevCandle = chartData.candles[chartData.candles.length - 2];
+            const change = ((lastCandle.close - prevCandle.close) / prevCandle.close * 100);
+            
+            marketData[symbol].price = lastCandle.close;
+            marketData[symbol].changePercent = change;
+            
+            updateCurrentStockInfo();
+            updateDetailStats(lastCandle);
+        }
+
+        function updateDetailStats(candle) {
+            document.getElementById('openPrice').textContent = formatPrice(candle.open);
+            document.getElementById('highPrice').textContent = formatPrice(candle.high);
+            document.getElementById('lowPrice').textContent = formatPrice(candle.low);
+            document.getElementById('volume').textContent = (Math.random() * 10).toFixed(1) + 'B';
+        }
+
+        function updateLegend() {
+            const legend = document.getElementById('legend');
+            const indicators = [];
+            
+            if (document.querySelector('[data-indicator="ma"]').classList.contains('active')) {
+                indicators.push({ name: 'MA 20', color: '#2962ff' });
+            }
+            if (document.querySelector('[data-indicator="ema"]').classList.contains('active')) {
+                indicators.push({ name: 'EMA 20', color: '#ff6d00' });
+            }
+            if (document.querySelector('[data-indicator="boll"]').classList.contains('active')) {
+                indicators.push({ name: 'BOLL', color: '#9c27b0' });
+            }
+            
+            legend.innerHTML = indicators.map(ind => `
+                <div class="legend-item">
+                    <div class="legend-color" style="background: ${ind.color}"></div>
+                    <span>${ind.name}</span>
+                </div>
+            `).join('');
         }
 
         document.querySelectorAll('.indicator-item').forEach(item => {
@@ -736,28 +1004,6 @@ plot(ma, color=color.blue, title=&quot;MA&quot;)"></textarea>
             });
         });
 
-        function updateLegend() {
-            const legend = document.getElementById('legend');
-            const indicators = [];
-            
-            if (document.querySelector('[data-indicator="ma"]').classList.contains('active')) {
-                indicators.push({ name: 'MA 20', color: '#2962ff' });
-            }
-            if (document.querySelector('[data-indicator="ema"]').classList.contains('active')) {
-                indicators.push({ name: 'EMA 20', color: '#ff6d00' });
-            }
-            if (document.querySelector('[data-indicator="boll"]').classList.contains('active')) {
-                indicators.push({ name: 'BOLL', color: '#9c27b0' });
-            }
-            
-            legend.innerHTML = indicators.map(ind => `
-                <div class="legend-item">
-                    <div class="legend-color" style="background: ${ind.color}"></div>
-                    <span>${ind.name}</span>
-                </div>
-            `).join('');
-        }
-
         document.querySelectorAll('.chart-type-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.chart-type-btn').forEach(b => b.classList.remove('active'));
@@ -767,16 +1013,18 @@ plot(ma, color=color.blue, title=&quot;MA&quot;)"></textarea>
                 candleSeries.applyOptions({ visible: type === 'candle' });
                 
                 if (type !== 'candle') {
-                    const lineData = currentData.candles.map(d => ({ time: d.time, value: d.close }));
-                    if (!chart.lineSeries) {
-                        chart.lineSeries = chart.addAreaSeries({
+                    const chartData = generateCandleData(currentSymbol);
+                    const lineData = chartData.candles.map(d => ({ time: d.time, value: d.close }));
+                    
+                    if (!chart.areaSeries) {
+                        chart.areaSeries = chart.addAreaSeries({
                             lineColor: '#00d4ff',
                             topColor: 'rgba(0, 212, 255, 0.4)',
                             bottomColor: 'rgba(0, 212, 255, 0.0)',
                         });
                     }
-                    chart.lineSeries.setData(lineData);
-                    chart.lineSeries.applyOptions({ visible: type === 'area' });
+                    chart.areaSeries.setData(lineData);
+                    chart.areaSeries.applyOptions({ visible: type === 'area' });
                     
                     if (!chart.simpleLineSeries) {
                         chart.simpleLineSeries = chart.addLineSeries({ color: '#00d4ff', lineWidth: 2 });
@@ -791,38 +1039,16 @@ plot(ma, color=color.blue, title=&quot;MA&quot;)"></textarea>
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.tf-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-                currentData = generateCandleData();
-                candleSeries.setData(currentData.candles);
-                volumeSeries.setData(currentData.volumes);
-                maLine.setData(calculateMA(currentData.candles));
-                emaLine.setData(calculateEMA(currentData.candles));
-                const boll = calculateBollinger(currentData.candles);
-                bollUpper.setData(boll.upper);
-                bollMiddle.setData(boll.middle);
-                bollLower.setData(boll.lower);
-                updateStockInfo();
+                loadChartData(currentSymbol);
             });
-        });
-
-        document.getElementById('stockSelect').addEventListener('change', (e) => {
-            document.getElementById('stockName').textContent = e.target.value;
-            currentData = generateCandleData();
-            candleSeries.setData(currentData.candles);
-            volumeSeries.setData(currentData.volumes);
-            maLine.setData(calculateMA(currentData.candles));
-            emaLine.setData(calculateEMA(currentData.candles));
-            const boll = calculateBollinger(currentData.candles);
-            bollUpper.setData(boll.upper);
-            bollMiddle.setData(boll.middle);
-            bollLower.setData(boll.lower);
-            updateStockInfo();
         });
 
         document.getElementById('applyScript').addEventListener('click', () => {
             const script = document.getElementById('pineScript').value;
             if (script.trim()) {
                 const period = 14;
-                const customMA = calculateMA(currentData.candles, period);
+                const chartData = generateCandleData(currentSymbol);
+                const customMA = calculateMA(chartData.candles, period);
                 
                 if (!chart.customLine) {
                     chart.customLine = chart.addLineSeries({ 
@@ -839,11 +1065,16 @@ plot(ma, color=color.blue, title=&quot;MA&quot;)"></textarea>
         });
 
         window.addEventListener('resize', () => {
-            chart.applyOptions({ width: chartContainer.clientWidth });
+            chart.applyOptions({ width: document.getElementById('chart-container').clientWidth });
         });
 
-        chart.timeScale().fitContent();
+        initMarketData();
+        generateMarketGrid();
+        initChart();
+        loadChartData(currentSymbol);
         updateLegend();
+        
+        priceUpdateInterval = setInterval(updateMarketPrices, 3000);
     </script>
 </body>
 </html>
