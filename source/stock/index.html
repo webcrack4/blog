@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>股票分析 - Clayton Web3.0</title>
+    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #0d0d1f 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        
+        .header {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(20px);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .header-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            background: linear-gradient(90deg, #00ff88, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+        
+        .nav {
+            display: flex;
+            gap: 40px;
+        }
+        
+        .nav a {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 15px;
+            transition: all 0.3s;
+            padding: 8px 0;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .nav a:hover {
+            color: #00d4ff;
+            border-bottom-color: #00d4ff;
+        }
+        
+        .nav a.active {
+            color: #00d4ff;
+            border-bottom-color: #00d4ff;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 30px 40px;
+        }
+        
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .page-title {
+            font-size: 36px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #00d4ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .stock-selector {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .stock-select {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 15px;
+            cursor: pointer;
+            min-width: 150px;
+        }
+        
+        .stock-select option {
+            background: #1a1a3e;
+            color: #fff;
+        }
+        
+        .timeframe-btns {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .tf-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #aaa;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tf-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+        
+        .tf-btn.active {
+            background: linear-gradient(135deg, #00d4ff, #00ff88);
+            color: #000;
+            border-color: transparent;
+            font-weight: 600;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 25px;
+        }
+        
+        @media (max-width: 1200px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .chart-section {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            overflow: hidden;
+        }
+        
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .stock-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .stock-name {
+            font-size: 22px;
+            font-weight: 600;
+        }
+        
+        .stock-price {
+            font-size: 22px;
+            font-weight: 700;
+        }
+        
+        .stock-change {
+            font-size: 14px;
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+        
+        .stock-change.up {
+            background: rgba(0, 255, 136, 0.15);
+            color: #00ff88;
+        }
+        
+        .stock-change.down {
+            background: rgba(255, 68, 68, 0.15);
+            color: #ff4444;
+        }
+        
+        .chart-types {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .chart-type-btn {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #888;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .chart-type-btn:hover {
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+        
+        .chart-type-btn.active {
+            background: rgba(0, 212, 255, 0.2);
+            border-color: #00d4ff;
+            color: #00d4ff;
+        }
+        
+        #chart-container {
+            height: 550px;
+        }
+        
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .panel {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 20px;
+        }
+        
+        .panel-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #00d4ff;
+        }
+        
+        .indicator-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .indicator-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .indicator-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+        }
+        
+        .indicator-item.active {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+        
+        .indicator-name {
+            font-size: 14px;
+        }
+        
+        .indicator-toggle {
+            width: 40px;
+            height: 22px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 11px;
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .indicator-item.active .indicator-toggle {
+            background: #00d4ff;
+        }
+        
+        .indicator-toggle::after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: #fff;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: all 0.3s;
+        }
+        
+        .indicator-item.active .indicator-toggle::after {
+            left: 20px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        
+        .stat-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            padding: 15px;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 5px;
+        }
+        
+        .stat-value {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .stat-value.up {
+            color: #00ff88;
+        }
+        
+        .stat-value.down {
+            color: #ff4444;
+        }
+        
+        .pine-editor {
+            margin-top: 10px;
+        }
+        
+        .pine-textarea {
+            width: 100%;
+            height: 120px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #00ff88;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 12px;
+            padding: 15px;
+            resize: none;
+        }
+        
+        .pine-textarea:focus {
+            outline: none;
+            border-color: #00d4ff;
+        }
+        
+        .apply-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #00d4ff, #00ff88);
+            color: #000;
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s;
+        }
+        
+        .apply-btn:hover {
+            transform: scale(1.02);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #555;
+            font-size: 14px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            margin-top: 30px;
+        }
+        
+        .legend {
+            display: flex;
+            gap: 20px;
+            padding: 15px 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: #aaa;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 3px;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/home/" class="logo">Clayton Web3.0</a>
+            <nav class="nav">
+                <a href="/home/">首页</a>
+                <a href="/games/">游戏中心</a>
+                <a href="/stock/" class="active">股票分析</a>
+                <a href="/">博客</a>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">📈 股票技术分析</h1>
+            <div class="stock-selector">
+                <select class="stock-select" id="stockSelect">
+                    <option value="AAPL">AAPL 苹果</option>
+                    <option value="GOOGL">GOOGL 谷歌</option>
+                    <option value="MSFT">MSFT 微软</option>
+                    <option value="TSLA">TSLA 特斯拉</option>
+                    <option value="AMZN">AMZN 亚马逊</option>
+                    <option value="NVDA">NVDA 英伟达</option>
+                    <option value="META">META Meta</option>
+                    <option value="BTC">BTC/USD 比特币</option>
+                    <option value="ETH">ETH/USD 以太坊</option>
+                </select>
+                <div class="timeframe-btns">
+                    <button class="tf-btn" data-tf="1D">1天</button>
+                    <button class="tf-btn active" data-tf="1W">1周</button>
+                    <button class="tf-btn" data-tf="1M">1月</button>
+                    <button class="tf-btn" data-tf="1Y">1年</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="chart-section">
+                <div class="chart-header">
+                    <div class="stock-info">
+                        <span class="stock-name" id="stockName">AAPL</span>
+                        <span class="stock-price" id="stockPrice">$178.52</span>
+                        <span class="stock-change up" id="stockChange">+2.34%</span>
+                    </div>
+                    <div class="chart-types">
+                        <button class="chart-type-btn active" data-type="candle">K线</button>
+                        <button class="chart-type-btn" data-type="line">折线</button>
+                        <button class="chart-type-btn" data-type="area">面积</button>
+                    </div>
+                </div>
+                <div id="chart-container"></div>
+                <div class="legend" id="legend"></div>
+            </div>
+            
+            <div class="sidebar">
+                <div class="panel">
+                    <h3 class="panel-title">📊 技术指标</h3>
+                    <div class="indicator-list">
+                        <div class="indicator-item active" data-indicator="ma">
+                            <span class="indicator-name">MA 移动平均线</span>
+                            <div class="indicator-toggle"></div>
+                        </div>
+                        <div class="indicator-item" data-indicator="ema">
+                            <span class="indicator-name">EMA 指数移动平均</span>
+                            <div class="indicator-toggle"></div>
+                        </div>
+                        <div class="indicator-item" data-indicator="boll">
+                            <span class="indicator-name">BOLL 布林带</span>
+                            <div class="indicator-toggle"></div>
+                        </div>
+                        <div class="indicator-item" data-indicator="macd">
+                            <span class="indicator-name">MACD</span>
+                            <div class="indicator-toggle"></div>
+                        </div>
+                        <div class="indicator-item" data-indicator="rsi">
+                            <span class="indicator-name">RSI 相对强弱</span>
+                            <div class="indicator-toggle"></div>
+                        </div>
+                        <div class="indicator-item" data-indicator="volume">
+                            <span class="indicator-name">VOL 成交量</span>
+                            <div class="indicator-toggle"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="panel">
+                    <h3 class="panel-title">📋 实时数据</h3>
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <div class="stat-label">开盘价</div>
+                            <div class="stat-value" id="openPrice">$175.20</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">最高价</div>
+                            <div class="stat-value up" id="highPrice">$179.80</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">最低价</div>
+                            <div class="stat-value down" id="lowPrice">$174.50</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">成交量</div>
+                            <div class="stat-value" id="volume">52.3M</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="panel">
+                    <h3 class="panel-title">🔧 Pine脚本</h3>
+                    <div class="pine-editor">
+                        <textarea class="pine-textarea" id="pineScript" placeholder="// Pine Script 风格指标
+// 示例: 计算简单移动平均
+//@version=5
+indicator(&quot;Custom MA&quot;, overlay=true)
+length = input(14, &quot;Length&quot;)
+ma = ta.sma(close, length)
+plot(ma, color=color.blue, title=&quot;MA&quot;)"></textarea>
+                        <button class="apply-btn" id="applyScript">应用指标</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        © 2024 Clayton Web3.0. 数据仅供演示，不构成投资建议。
+    </footer>
+
+    <script>
+        const chartContainer = document.getElementById('chart-container');
+        const chart = LightweightCharts.createChart(chartContainer, {
+            width: chartContainer.clientWidth,
+            height: 550,
+            layout: {
+                background: { type: 'solid', color: 'transparent' },
+                textColor: '#aaa',
+            },
+            grid: {
+                vertLines: { color: 'rgba(255, 255, 255, 0.05)' },
+                horzLines: { color: 'rgba(255, 255, 255, 0.05)' },
+            },
+            crosshair: {
+                mode: LightweightCharts.CrosshairMode.Normal,
+            },
+            rightPriceScale: {
+                borderColor: 'rgba(255, 255, 255, 0.1)',
+            },
+            timeScale: {
+                borderColor: 'rgba(255, 255, 255, 0.1)',
+                timeVisible: true,
+            },
+        });
+
+        let candleSeries = chart.addCandlestickSeries({
+            upColor: '#00ff88',
+            downColor: '#ff4444',
+            borderUpColor: '#00ff88',
+            borderDownColor: '#ff4444',
+            wickUpColor: '#00ff88',
+            wickDownColor: '#ff4444',
+        });
+
+        let volumeSeries = chart.addHistogramSeries({
+            color: '#26a69a',
+            priceFormat: { type: 'volume' },
+            priceScaleId: '',
+            scaleMargins: { top: 0.85, bottom: 0 },
+        });
+
+        volumeSeries.applyOptions({ visible: false });
+
+        let maLine = chart.addLineSeries({
+            color: '#2962ff',
+            lineWidth: 2,
+            title: 'MA 20',
+        });
+
+        let emaLine = chart.addLineSeries({
+            color: '#ff6d00',
+            lineWidth: 2,
+            title: 'EMA 20',
+        });
+        emaLine.applyOptions({ visible: false });
+
+        let bollUpper = chart.addLineSeries({ color: '#9c27b0', lineWidth: 1, title: 'BOLL Upper' });
+        let bollMiddle = chart.addLineSeries({ color: '#9c27b0', lineWidth: 1, title: 'BOLL Middle' });
+        let bollLower = chart.addLineSeries({ color: '#9c27b0', lineWidth: 1, title: 'BOLL Lower' });
+        bollUpper.applyOptions({ visible: false });
+        bollMiddle.applyOptions({ visible: false });
+        bollLower.applyOptions({ visible: false });
+
+        function generateCandleData(days = 200) {
+            const data = [];
+            const volumeData = [];
+            let basePrice = 150 + Math.random() * 50;
+            let time = Math.floor(Date.now() / 1000) - days * 86400;
+            
+            for (let i = 0; i < days; i++) {
+                const volatility = 0.02 + Math.random() * 0.03;
+                const change = (Math.random() - 0.48) * volatility;
+                const open = basePrice;
+                const close = basePrice * (1 + change);
+                const high = Math.max(open, close) * (1 + Math.random() * 0.01);
+                const low = Math.min(open, close) * (1 - Math.random() * 0.01);
+                const volume = Math.floor(20000000 + Math.random() * 80000000);
+                
+                data.push({ time, open, high, low, close });
+                volumeData.push({ 
+                    time, 
+                    value: volume, 
+                    color: close >= open ? 'rgba(0, 255, 136, 0.3)' : 'rgba(255, 68, 68, 0.3)'
+                });
+                
+                basePrice = close;
+                time += 86400;
+            }
+            return { candles: data, volumes: volumeData };
+        }
+
+        function calculateMA(data, period = 20) {
+            const maData = [];
+            for (let i = period - 1; i < data.length; i++) {
+                let sum = 0;
+                for (let j = 0; j < period; j++) {
+                    sum += data[i - j].close;
+                }
+                maData.push({ time: data[i].time, value: sum / period });
+            }
+            return maData;
+        }
+
+        function calculateEMA(data, period = 20) {
+            const emaData = [];
+            const multiplier = 2 / (period + 1);
+            let ema = data[0].close;
+            
+            for (let i = 0; i < data.length; i++) {
+                if (i < period - 1) {
+                    ema = ema * (i + 1) / (i + 2) + data[i].close / (i + 2);
+                } else {
+                    ema = (data[i].close - ema) * multiplier + ema;
+                    emaData.push({ time: data[i].time, value: ema });
+                }
+            }
+            return emaData;
+        }
+
+        function calculateBollinger(data, period = 20, stdDev = 2) {
+            const upper = [], middle = [], lower = [];
+            
+            for (let i = period - 1; i < data.length; i++) {
+                const slice = data.slice(i - period + 1, i + 1);
+                const closes = slice.map(d => d.close);
+                const mean = closes.reduce((a, b) => a + b) / period;
+                const variance = closes.reduce((sum, val) => sum + Math.pow(val - mean, 2), 0) / period;
+                const std = Math.sqrt(variance);
+                
+                middle.push({ time: data[i].time, value: mean });
+                upper.push({ time: data[i].time, value: mean + stdDev * std });
+                lower.push({ time: data[i].time, value: mean - stdDev * std });
+            }
+            return { upper, middle, lower };
+        }
+
+        let currentData = generateCandleData();
+        candleSeries.setData(currentData.candles);
+        volumeSeries.setData(currentData.volumes);
+        maLine.setData(calculateMA(currentData.candles));
+        emaLine.setData(calculateEMA(currentData.candles));
+        
+        const bollData = calculateBollinger(currentData.candles);
+        bollUpper.setData(bollData.upper);
+        bollMiddle.setData(bollData.middle);
+        bollLower.setData(bollData.lower);
+
+        updateStockInfo();
+
+        function updateStockInfo() {
+            const lastCandle = currentData.candles[currentData.candles.length - 1];
+            const prevCandle = currentData.candles[currentData.candles.length - 2];
+            const change = ((lastCandle.close - prevCandle.close) / prevCandle.close * 100).toFixed(2);
+            
+            document.getElementById('stockPrice').textContent = `$${lastCandle.close.toFixed(2)}`;
+            document.getElementById('stockChange').textContent = `${change >= 0 ? '+' : ''}${change}%`;
+            document.getElementById('stockChange').className = `stock-change ${change >= 0 ? 'up' : 'down'}`;
+            document.getElementById('openPrice').textContent = `$${lastCandle.open.toFixed(2)}`;
+            document.getElementById('highPrice').textContent = `$${lastCandle.high.toFixed(2)}`;
+            document.getElementById('lowPrice').textContent = `$${lastCandle.low.toFixed(2)}`;
+            
+            const totalVolume = currentData.volumes.reduce((sum, v) => sum + v.value, 0);
+            document.getElementById('volume').textContent = (totalVolume / 1000000).toFixed(1) + 'M';
+        }
+
+        document.querySelectorAll('.indicator-item').forEach(item => {
+            item.addEventListener('click', () => {
+                item.classList.toggle('active');
+                const indicator = item.dataset.indicator;
+                
+                switch(indicator) {
+                    case 'ma':
+                        maLine.applyOptions({ visible: item.classList.contains('active') });
+                        break;
+                    case 'ema':
+                        emaLine.applyOptions({ visible: item.classList.contains('active') });
+                        break;
+                    case 'boll':
+                        const visible = item.classList.contains('active');
+                        bollUpper.applyOptions({ visible });
+                        bollMiddle.applyOptions({ visible });
+                        bollLower.applyOptions({ visible });
+                        break;
+                    case 'volume':
+                        volumeSeries.applyOptions({ visible: item.classList.contains('active') });
+                        break;
+                }
+                updateLegend();
+            });
+        });
+
+        function updateLegend() {
+            const legend = document.getElementById('legend');
+            const indicators = [];
+            
+            if (document.querySelector('[data-indicator="ma"]').classList.contains('active')) {
+                indicators.push({ name: 'MA 20', color: '#2962ff' });
+            }
+            if (document.querySelector('[data-indicator="ema"]').classList.contains('active')) {
+                indicators.push({ name: 'EMA 20', color: '#ff6d00' });
+            }
+            if (document.querySelector('[data-indicator="boll"]').classList.contains('active')) {
+                indicators.push({ name: 'BOLL', color: '#9c27b0' });
+            }
+            
+            legend.innerHTML = indicators.map(ind => `
+                <div class="legend-item">
+                    <div class="legend-color" style="background: ${ind.color}"></div>
+                    <span>${ind.name}</span>
+                </div>
+            `).join('');
+        }
+
+        document.querySelectorAll('.chart-type-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.chart-type-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const type = btn.dataset.type;
+                candleSeries.applyOptions({ visible: type === 'candle' });
+                
+                if (type !== 'candle') {
+                    const lineData = currentData.candles.map(d => ({ time: d.time, value: d.close }));
+                    if (!chart.lineSeries) {
+                        chart.lineSeries = chart.addAreaSeries({
+                            lineColor: '#00d4ff',
+                            topColor: 'rgba(0, 212, 255, 0.4)',
+                            bottomColor: 'rgba(0, 212, 255, 0.0)',
+                        });
+                    }
+                    chart.lineSeries.setData(lineData);
+                    chart.lineSeries.applyOptions({ visible: type === 'area' });
+                    
+                    if (!chart.simpleLineSeries) {
+                        chart.simpleLineSeries = chart.addLineSeries({ color: '#00d4ff', lineWidth: 2 });
+                    }
+                    chart.simpleLineSeries.setData(lineData);
+                    chart.simpleLineSeries.applyOptions({ visible: type === 'line' });
+                }
+            });
+        });
+
+        document.querySelectorAll('.tf-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tf-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentData = generateCandleData();
+                candleSeries.setData(currentData.candles);
+                volumeSeries.setData(currentData.volumes);
+                maLine.setData(calculateMA(currentData.candles));
+                emaLine.setData(calculateEMA(currentData.candles));
+                const boll = calculateBollinger(currentData.candles);
+                bollUpper.setData(boll.upper);
+                bollMiddle.setData(boll.middle);
+                bollLower.setData(boll.lower);
+                updateStockInfo();
+            });
+        });
+
+        document.getElementById('stockSelect').addEventListener('change', (e) => {
+            document.getElementById('stockName').textContent = e.target.value;
+            currentData = generateCandleData();
+            candleSeries.setData(currentData.candles);
+            volumeSeries.setData(currentData.volumes);
+            maLine.setData(calculateMA(currentData.candles));
+            emaLine.setData(calculateEMA(currentData.candles));
+            const boll = calculateBollinger(currentData.candles);
+            bollUpper.setData(boll.upper);
+            bollMiddle.setData(boll.middle);
+            bollLower.setData(boll.lower);
+            updateStockInfo();
+        });
+
+        document.getElementById('applyScript').addEventListener('click', () => {
+            const script = document.getElementById('pineScript').value;
+            if (script.trim()) {
+                const period = 14;
+                const customMA = calculateMA(currentData.candles, period);
+                
+                if (!chart.customLine) {
+                    chart.customLine = chart.addLineSeries({ 
+                        color: '#00ff88', 
+                        lineWidth: 2,
+                        title: 'Custom MA ' + period
+                    });
+                }
+                chart.customLine.setData(customMA);
+                chart.customLine.applyOptions({ visible: true });
+                
+                alert('自定义指标已应用！\n计算了 ' + period + ' 周期的移动平均线');
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            chart.applyOptions({ width: chartContainer.clientWidth });
+        });
+
+        chart.timeScale().fitContent();
+        updateLegend();
+    </script>
+</body>
+</html>
