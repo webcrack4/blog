@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clayton Web3.0 - 首页</title>
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -13,15 +12,15 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #0d0d1f 100%);
             min-height: 100vh;
             color: #fff;
         }
         
         .header {
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(20px);
             padding: 20px 0;
             position: sticky;
             top: 0;
@@ -32,567 +31,310 @@
         .header-content {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 30px;
+            padding: 0 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         
         .logo {
-            font-size: 24px;
+            font-size: 26px;
             font-weight: bold;
-            color: #00ff88;
+            background: linear-gradient(90deg, #00ff88, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             text-decoration: none;
         }
         
         .nav {
             display: flex;
-            gap: 30px;
+            gap: 40px;
         }
         
         .nav a {
             color: #aaa;
             text-decoration: none;
             font-size: 15px;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            padding: 8px 0;
+            border-bottom: 2px solid transparent;
         }
         
         .nav a:hover {
             color: #00ff88;
+            border-bottom-color: #00ff88;
         }
         
-        .container {
-            max-width: 1400px;
+        .hero {
+            text-align: center;
+            padding: 80px 40px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 40px 30px;
         }
         
-        .section {
-            margin-bottom: 50px;
-        }
-        
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-        
-        .section-icon {
-            font-size: 32px;
-        }
-        
-        .section-title {
-            font-size: 28px;
-            font-weight: 600;
-            background: linear-gradient(90deg, #00ff88, #00d4ff);
+        .hero-title {
+            font-size: 52px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #fff, #00ff88, #00d4ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
         
-        .section-desc {
-            color: #888;
-            font-size: 14px;
-            margin-left: auto;
-        }
-        
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-        }
-        
-        .game-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            padding: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .game-card:hover {
-            transform: translateY(-8px);
-            background: rgba(255, 255, 255, 0.1);
-            border-color: #00ff88;
-            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.15);
-        }
-        
-        .game-icon {
-            font-size: 50px;
-            margin-bottom: 15px;
-        }
-        
-        .game-card h3 {
-            color: #fff;
+        .hero-subtitle {
             font-size: 20px;
-            margin-bottom: 10px;
-        }
-        
-        .game-card p {
-            color: #aaa;
-            font-size: 14px;
+            color: #888;
+            margin-bottom: 50px;
             line-height: 1.6;
-            flex-grow: 1;
         }
         
-        .game-tag {
-            display: inline-block;
-            background: rgba(0, 255, 136, 0.15);
-            color: #00ff88;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            margin-top: 15px;
-        }
-        
-        .stock-section {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 20px;
-            padding: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        
-        .stock-tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-        }
-        
-        .stock-tab {
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            color: #aaa;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s;
-        }
-        
-        .stock-tab:hover {
-            background: rgba(255, 255, 255, 0.15);
-            color: #fff;
-        }
-        
-        .stock-tab.active {
-            background: linear-gradient(135deg, #00ff88, #00d4ff);
-            color: #000;
-            font-weight: 600;
-        }
-        
-        .stock-content {
+        .main-sections {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 30px;
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px 80px;
         }
         
-        @media (max-width: 900px) {
-            .stock-content {
+        @media (max-width: 1000px) {
+            .main-sections {
                 grid-template-columns: 1fr;
             }
         }
         
-        .chart-container {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 12px;
-            padding: 20px;
-        }
-        
-        .chart-title {
-            font-size: 16px;
-            color: #fff;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .chart-title .price {
-            color: #00ff88;
-            font-weight: bold;
-        }
-        
-        .chart-title .change {
-            font-size: 14px;
-            padding: 3px 8px;
-            border-radius: 4px;
-        }
-        
-        .change.up {
-            background: rgba(0, 255, 136, 0.2);
-            color: #00ff88;
-        }
-        
-        .change.down {
-            background: rgba(255, 68, 68, 0.2);
-            color: #ff4444;
-        }
-        
-        .stock-list {
+        .section-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 24px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            text-decoration: none;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            min-height: 400px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
         }
         
-        .stock-item {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            padding: 15px 20px;
+        .section-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--card-color), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .section-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: var(--card-color);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .section-card:hover::before {
+            opacity: 1;
+        }
+        
+        .section-card.games {
+            --card-color: #00ff88;
+        }
+        
+        .section-card.stocks {
+            --card-color: #00d4ff;
+        }
+        
+        .section-icon {
+            font-size: 64px;
+            margin-bottom: 25px;
+        }
+        
+        .section-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+        
+        .section-desc {
+            color: #888;
+            font-size: 16px;
+            line-height: 1.7;
+            margin-bottom: 30px;
+            flex-grow: 1;
+        }
+        
+        .section-features {
             display: flex;
-            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .feature-tag {
+            background: rgba(255, 255, 255, 0.08);
+            color: #aaa;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+        
+        .section-card.games .feature-tag {
+            background: rgba(0, 255, 136, 0.1);
+            color: #00ff88;
+        }
+        
+        .section-card.stocks .feature-tag {
+            background: rgba(0, 212, 255, 0.1);
+            color: #00d4ff;
+        }
+        
+        .enter-btn {
+            display: inline-flex;
             align-items: center;
-            cursor: pointer;
+            gap: 10px;
+            background: var(--card-color);
+            color: #000;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
             transition: all 0.3s;
         }
         
-        .stock-item:hover {
-            background: rgba(255, 255, 255, 0.1);
+        .enter-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(var(--card-rgb), 0.3);
         }
         
-        .stock-item .name {
-            font-weight: 500;
+        .section-card.games .enter-btn {
+            --card-color: #00ff88;
+            --card-rgb: 0, 255, 136;
         }
         
-        .stock-item .code {
+        .section-card.stocks .enter-btn {
+            --card-color: #00d4ff;
+            --card-rgb: 0, 212, 255;
+        }
+        
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: auto;
+        }
+        
+        .preview-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .preview-item-icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        
+        .preview-item-name {
+            font-size: 12px;
             color: #888;
-            font-size: 13px;
-            margin-left: 10px;
         }
         
-        .stock-item .price-info {
-            text-align: right;
-        }
-        
-        .stock-item .current-price {
-            font-size: 18px;
-            font-weight: 600;
-        }
-        
-        .stock-item .price-change {
-            font-size: 13px;
-            margin-top: 3px;
-        }
-        
-        .price-up {
-            color: #00ff88;
-        }
-        
-        .price-down {
-            color: #ff4444;
+        .chart-preview {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            height: 120px;
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #555;
+            font-size: 14px;
         }
         
         .footer {
             text-align: center;
-            padding: 40px 0;
-            color: #666;
+            padding: 40px;
+            color: #555;
             font-size: 14px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            margin-top: 50px;
-        }
-        
-        .footer a {
-            color: #00ff88;
-            text-decoration: none;
-        }
-        
-        .more-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: #00d4ff;
-            text-decoration: none;
-            font-size: 14px;
-            margin-top: 20px;
-            transition: gap 0.3s;
-        }
-        
-        .more-link:hover {
-            gap: 12px;
-        }
-        
-        .time-display {
-            color: #888;
-            font-size: 13px;
-            text-align: right;
-            margin-bottom: 15px;
+            border-top: 1px solid rgba(255,255,255,0.05);
         }
     </style>
 </head>
 <body>
     <header class="header">
         <div class="header-content">
-            <a href="/" class="logo">Clayton Web3.0</a>
+            <a href="/home/" class="logo">Clayton Web3.0</a>
             <nav class="nav">
-                <a href="/">首页</a>
+                <a href="/home/">首页</a>
                 <a href="/games/">游戏中心</a>
-                <a href="/archives/">博客</a>
-                <a href="/about/">关于</a>
+                <a href="/stock/">股票分析</a>
+                <a href="/">博客</a>
             </nav>
         </div>
     </header>
     
-    <div class="container">
-        <section class="section">
-            <div class="section-header">
-                <span class="section-icon">🎮</span>
-                <h2 class="section-title">游戏中心</h2>
-                <span class="section-desc">经典网页游戏，无需安装</span>
+    <section class="hero">
+        <h1 class="hero-title">探索数字世界的无限可能</h1>
+        <p class="hero-subtitle">游戏娱乐与技术分析的完美结合，在这里发现乐趣与机遇</p>
+    </section>
+    
+    <div class="main-sections">
+        <a href="/games/" class="section-card games">
+            <div class="section-icon">🎮</div>
+            <h2 class="section-title">游戏中心</h2>
+            <p class="section-desc">经典网页游戏合集，包含Flappy Bird、坦克大战、俄罗斯方块、1024、推箱子等多款精品游戏，随时随地享受游戏乐趣。</p>
+            <div class="section-features">
+                <span class="feature-tag">经典游戏</span>
+                <span class="feature-tag">无需下载</span>
+                <span class="feature-tag">免费畅玩</span>
             </div>
-            <div class="games-grid">
-                <a href="/games/flappy-bird/" class="game-card">
-                    <div class="game-icon">🐦</div>
-                    <h3>Flappy Bird</h3>
-                    <p>经典像素鸟游戏，点击屏幕让小鸟飞翔，穿过管道获得分数</p>
-                    <span class="game-tag">休闲</span>
-                </a>
-                
-                <a href="/games/tank-battle/" class="game-card">
-                    <div class="game-icon">🎮</div>
-                    <h3>Tank Battle</h3>
-                    <p>经典坦克大战，消灭敌方坦克，保护你的基地</p>
-                    <span class="game-tag">动作</span>
-                </a>
-                
-                <a href="/games/tetris/" class="game-card">
-                    <div class="game-icon">🧱</div>
-                    <h3>Tetris</h3>
-                    <p>永恒的俄罗斯方块，旋转、移动、消除方块</p>
-                    <span class="game-tag">益智</span>
-                </a>
-                
-                <a href="/games/1024/" class="game-card">
-                    <div class="game-icon">🔢</div>
-                    <h3>1024</h3>
-                    <p>经典数字合并游戏，滑动方块合并相同数字</p>
-                    <span class="game-tag">益智</span>
-                </a>
-                
-                <a href="/games/sokoban/" class="game-card">
-                    <div class="game-icon">📦</div>
-                    <h3>Sokoban</h3>
-                    <p>经典推箱子游戏，共10个关卡，开动脑筋</p>
-                    <span class="game-tag">益智</span>
-                </a>
+            <div class="preview-grid">
+                <div class="preview-item">
+                    <div class="preview-item-icon">🐦</div>
+                    <div class="preview-item-name">Flappy Bird</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-item-icon">🚀</div>
+                    <div class="preview-item-name">坦克大战</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-item-icon">🧩</div>
+                    <div class="preview-item-name">俄罗斯方块</div>
+                </div>
             </div>
-            <a href="/games/" class="more-link">查看全部游戏 →</a>
-        </section>
+            <div style="margin-top: 25px;">
+                <span class="enter-btn">进入游戏中心 →</span>
+            </div>
+        </a>
         
-        <section class="section">
-            <div class="section-header">
-                <span class="section-icon">📈</span>
-                <h2 class="section-title">股票行情</h2>
-                <span class="section-desc">数据仅供参考</span>
+        <a href="/stock/" class="section-card stocks">
+            <div class="section-icon">📈</div>
+            <h2 class="section-title">股票分析</h2>
+            <p class="section-desc">专业级技术分析工具，支持多种技术指标（MA、MACD、RSI、布林带等），实时行情展示，助您把握市场脉搏。</p>
+            <div class="section-features">
+                <span class="feature-tag">技术指标</span>
+                <span class="feature-tag">K线图表</span>
+                <span class="feature-tag">实时数据</span>
             </div>
-            <div class="stock-section">
-                <div class="time-display" id="updateTime">数据更新时间: --</div>
-                <div class="stock-tabs">
-                    <button class="stock-tab active" data-type="us">美股</button>
-                    <button class="stock-tab" data-type="hk">港股</button>
-                    <button class="stock-tab" data-type="cn">A股</button>
-                    <button class="stock-tab" data-type="crypto">加密货币</button>
-                </div>
-                <div class="stock-content">
-                    <div class="chart-container">
-                        <div class="chart-title">
-                            <span id="chartStockName">道琼斯指数</span>
-                            <span class="price" id="chartPrice">--</span>
-                            <span class="change up" id="chartChange">--</span>
-                        </div>
-                        <div id="stockChart" style="width: 100%; height: 350px;"></div>
-                    </div>
-                    <div class="stock-list" id="stockList">
-                    </div>
-                </div>
+            <div class="chart-preview">
+                📊 专业K线图表与技术指标分析
             </div>
-        </section>
+            <div style="margin-top: 25px;">
+                <span class="enter-btn">进入股票分析 →</span>
+            </div>
+        </a>
     </div>
     
     <footer class="footer">
-        <p>© 2026 Clayton Web3.0 | <a href="/archives/">博客文章</a> | <a href="/about/">关于我</a></p>
+        © 2024 Clayton Web3.0. All rights reserved.
     </footer>
-    
-    <script>
-        const stockData = {
-            us: [
-                { name: '道琼斯', code: 'DJI', price: 38675.68, change: 0.85, data: generateChartData(38675, 0.85) },
-                { name: '纳斯达克', code: 'NASDAQ', price: 16156.33, change: 1.24, data: generateChartData(16156, 1.24) },
-                { name: '标普500', code: 'SPX', price: 5123.69, change: 0.92, data: generateChartData(5123, 0.92) },
-                { name: '苹果', code: 'AAPL', price: 182.52, change: -0.35, data: generateChartData(182, -0.35) },
-                { name: '特斯拉', code: 'TSLA', price: 238.45, change: 2.15, data: generateChartData(238, 2.15) },
-                { name: '英伟达', code: 'NVDA', price: 875.28, change: 3.28, data: generateChartData(875, 3.28) }
-            ],
-            hk: [
-                { name: '恒生指数', code: 'HSI', price: 16589.44, change: -0.45, data: generateChartData(16589, -0.45) },
-                { name: '腾讯', code: '00700', price: 285.60, change: 0.78, data: generateChartData(285, 0.78) },
-                { name: '阿里巴巴', code: '09988', price: 72.35, change: -1.25, data: generateChartData(72, -1.25) },
-                { name: '美团', code: '03690', price: 128.90, change: 1.56, data: generateChartData(128, 1.56) },
-                { name: '小米', code: '01810', price: 15.82, change: 2.34, data: generateChartData(15, 2.34) },
-                { name: '比亚迪', code: '01211', price: 225.80, change: -0.68, data: generateChartData(225, -0.68) }
-            ],
-            cn: [
-                { name: '上证指数', code: '000001', price: 3028.56, change: 0.35, data: generateChartData(3028, 0.35) },
-                { name: '深证成指', code: '399001', price: 9250.78, change: 0.68, data: generateChartData(9250, 0.68) },
-                { name: '创业板指', code: '399006', price: 1825.34, change: 1.12, data: generateChartData(1825, 1.12) },
-                { name: '贵州茅台', code: '600519', price: 1688.00, change: -0.25, data: generateChartData(1688, -0.25) },
-                { name: '宁德时代', code: '300750', price: 168.50, change: 1.85, data: generateChartData(168, 1.85) },
-                { name: '中国平安', code: '601318', price: 42.85, change: 0.45, data: generateChartData(42, 0.45) }
-            ],
-            crypto: [
-                { name: '比特币', code: 'BTC', price: 62850.00, change: 2.85, data: generateChartData(62850, 2.85) },
-                { name: '以太坊', code: 'ETH', price: 3456.78, change: 1.92, data: generateChartData(3456, 1.92) },
-                { name: 'BNB', code: 'BNB', price: 568.45, change: -0.85, data: generateChartData(568, -0.85) },
-                { name: 'Solana', code: 'SOL', price: 128.90, change: 4.56, data: generateChartData(128, 4.56) },
-                { name: 'XRP', code: 'XRP', price: 0.5234, change: 1.28, data: generateChartData(0.52, 1.28) },
-                { name: 'Cardano', code: 'ADA', price: 0.4567, change: -2.15, data: generateChartData(0.45, -2.15) }
-            ]
-        };
-        
-        function generateChartData(basePrice, trend) {
-            const data = [];
-            let price = basePrice * (1 - trend / 100);
-            for (let i = 0; i < 30; i++) {
-                const volatility = basePrice * 0.02;
-                price = price + (Math.random() - 0.45) * volatility;
-                const date = new Date();
-                date.setDate(date.getDate() - (29 - i));
-                data.push({
-                    date: date.toISOString().split('T')[0],
-                    value: parseFloat(price.toFixed(2)),
-                    volume: Math.floor(Math.random() * 100000000)
-                });
-            }
-            return data;
-        }
-        
-        let chart = null;
-        let currentType = 'us';
-        let currentStock = stockData.us[0];
-        
-        function initChart() {
-            chart = echarts.init(document.getElementById('stockChart'));
-            updateChart(currentStock);
-        }
-        
-        function updateChart(stock) {
-            currentStock = stock;
-            const option = {
-                backgroundColor: 'transparent',
-                tooltip: {
-                    trigger: 'axis',
-                    backgroundColor: 'rgba(0,0,0,0.8)',
-                    borderColor: '#00ff88',
-                    textStyle: { color: '#fff' },
-                    formatter: function(params) {
-                        const d = params[0];
-                        return `${d.name}<br/>价格: ${d.value}<br/>成交量: ${(d.data.volume / 1000000).toFixed(2)}M`;
-                    }
-                },
-                grid: {
-                    left: '3%',
-                    right: '4%',
-                    bottom: '15%',
-                    top: '10%',
-                    containLabel: true
-                },
-                xAxis: {
-                    type: 'category',
-                    data: stock.data.map(d => d.date.slice(5)),
-                    axisLine: { lineStyle: { color: '#444' } },
-                    axisLabel: { color: '#888', fontSize: 11 }
-                },
-                yAxis: {
-                    type: 'value',
-                    scale: true,
-                    axisLine: { lineStyle: { color: '#444' } },
-                    axisLabel: { color: '#888', fontSize: 11 },
-                    splitLine: { lineStyle: { color: '#222' } }
-                },
-                series: [{
-                    type: 'line',
-                    data: stock.data.map(d => ({ value: d.value, volume: d.volume })),
-                    smooth: true,
-                    symbol: 'none',
-                    lineStyle: {
-                        color: stock.change >= 0 ? '#00ff88' : '#ff4444',
-                        width: 2
-                    },
-                    areaStyle: {
-                        color: {
-                            type: 'linear',
-                            x: 0, y: 0, x2: 0, y2: 1,
-                            colorStops: stock.change >= 0 ? [
-                                { offset: 0, color: 'rgba(0, 255, 136, 0.3)' },
-                                { offset: 1, color: 'rgba(0, 255, 136, 0)' }
-                            ] : [
-                                { offset: 0, color: 'rgba(255, 68, 68, 0.3)' },
-                                { offset: 1, color: 'rgba(255, 68, 68, 0)' }
-                            ]
-                        }
-                    }
-                }]
-            };
-            chart.setOption(option);
-            
-            document.getElementById('chartStockName').textContent = stock.name;
-            document.getElementById('chartPrice').textContent = stock.price.toLocaleString();
-            const changeEl = document.getElementById('chartChange');
-            changeEl.textContent = (stock.change >= 0 ? '+' : '') + stock.change.toFixed(2) + '%';
-            changeEl.className = 'change ' + (stock.change >= 0 ? 'up' : 'down');
-        }
-        
-        function renderStockList(type) {
-            const list = stockData[type];
-            const listEl = document.getElementById('stockList');
-            listEl.innerHTML = list.map((stock, index) => `
-                <div class="stock-item" data-index="${index}">
-                    <div>
-                        <span class="name">${stock.name}</span>
-                        <span class="code">${stock.code}</span>
-                    </div>
-                    <div class="price-info">
-                        <div class="current-price ${stock.change >= 0 ? 'price-up' : 'price-down'}">${stock.price.toLocaleString()}</div>
-                        <div class="price-change ${stock.change >= 0 ? 'price-up' : 'price-down'}">${stock.change >= 0 ? '+' : ''}${stock.change.toFixed(2)}%</div>
-                    </div>
-                </div>
-            `).join('');
-            
-            document.querySelectorAll('.stock-item').forEach(item => {
-                item.addEventListener('click', () => {
-                    const index = parseInt(item.dataset.index);
-                    updateChart(stockData[type][index]);
-                });
-            });
-        }
-        
-        document.querySelectorAll('.stock-tab').forEach(tab => {
-            tab.addEventListener('click', () => {
-                document.querySelectorAll('.stock-tab').forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-                currentType = tab.dataset.type;
-                renderStockList(currentType);
-                updateChart(stockData[currentType][0]);
-            });
-        });
-        
-        function updateTime() {
-            const now = new Date();
-            document.getElementById('updateTime').textContent = 
-                `数据更新时间: ${now.toLocaleString('zh-CN')}`;
-        }
-        
-        window.addEventListener('resize', () => {
-            if (chart) chart.resize();
-        });
-        
-        initChart();
-        renderStockList('us');
-        updateTime();
-        setInterval(updateTime, 60000);
-    </script>
 </body>
 </html>
