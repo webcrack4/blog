@@ -30,6 +30,6 @@ tags:
 
 ### 开始游戏
 
-[点击这里开始游戏](/flappy-bird/)
+[点击这里开始游戏](/games/flappy-bird/)
 
 祝你好运！

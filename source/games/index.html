@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>游戏中心</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            font-family: 'Arial', sans-serif;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #00ff88;
+            margin-bottom: 10px;
+            font-size: 42px;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 40px;
+            font-size: 16px;
+        }
+        
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .game-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #00ff88;
+            box-shadow: 0 10px 40px rgba(0, 255, 136, 0.2);
+        }
+        
+        .game-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        
+        .game-card h2 {
+            color: #fff;
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
+        
+        .game-card p {
+            color: #aaa;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .game-tag {
+            display: inline-block;
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-top: 15px;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-top: 40px;
+            color: #888;
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 1px solid #444;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .back-link:hover {
+            color: #00ff88;
+            border-color: #00ff88;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Game Center</h1>
+        <p class="subtitle">经典网页游戏合集 - 无需安装，打开即玩</p>
+        
+        <div class="games-grid">
+            <a href="/games/flappy-bird/" class="game-card">
+                <div class="game-icon">🐦</div>
+                <h2>Flappy Bird</h2>
+                <p>经典像素鸟游戏，点击屏幕让小鸟飞翔，穿过管道获得分数。简单上手，挑战高分！</p>
+                <span class="game-tag">休闲</span>
+            </a>
+            
+            <a href="/games/tank-battle/" class="game-card">
+                <div class="game-icon">🎮</div>
+                <h2>Tank Battle</h2>
+                <p>经典坦克大战，消灭敌方坦克，保护你的基地。支持多关卡，难度递增！</p>
+                <span class="game-tag">动作</span>
+            </a>
+            
+            <a href="/games/tetris/" class="game-card">
+                <div class="game-icon">🧱</div>
+                <h2>Tetris</h2>
+                <p>永恒的俄罗斯方块，旋转、移动、消除方块。考验你的反应和策略！</p>
+                <span class="game-tag">益智</span>
+            </a>
+            
+            <a href="/games/1024/" class="game-card">
+                <div class="game-icon">🔢</div>
+                <h2>1024</h2>
+                <p>经典数字合并游戏，滑动方块合并相同数字，挑战1024！</p>
+                <span class="game-tag">益智</span>
+            </a>
+            
+            <a href="/games/sokoban/" class="game-card">
+                <div class="game-icon">📦</div>
+                <h2>Sokoban</h2>
+                <p>经典推箱子游戏，共10个关卡，开动脑筋把箱子推到目标位置！</p>
+                <span class="game-tag">益智</span>
+            </a>
+        </div>
+        
+        <div class="footer">
+            <a href="/" class="back-link">返回博客首页</a>
+        </div>
+    </div>
+</body>
+</html>
